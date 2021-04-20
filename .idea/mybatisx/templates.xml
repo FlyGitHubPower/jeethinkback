@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="TemplatesSettings">
+    <option name="templateConfigs">
+      <TemplateContext>
+        <option name="generateConfig">
+          <GenerateConfig>
+            <option name="annotationType" value="NONE" />
+            <option name="basePackage" value="22222" />
+            <option name="basePath" value="src/main/java" />
+            <option name="domainObjectName" value="SysFlowForm" />
+            <option name="encoding" value="UTF-8" />
+            <option name="extraTemplateNames">
+              <list>
+                <option value="mapperXml" />
+              </list>
+            </option>
+            <option name="moduleName" value="jeethink" />
+            <option name="modulePath" value="$PROJECT_DIR$/" />
+            <option name="relativePackage" value="domain" />
+            <option name="rootClass" value="" />
+            <option name="tableName" value="sys_flow_form" />
+            <option name="targetProject" value="$PROJECT_DIR$" />
+            <option name="templatesName" value="mybatis-plus2" />
+          </GenerateConfig>
+        </option>
+        <option name="projectPath" value="$PROJECT_DIR$" />
+      </TemplateContext>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.project.dynamic.mapper.SysFlowFormMapper">
+
+    <resultMap id="BaseResultMap" type="SysFlowForm">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="htmlfrom" column="htmlfrom" jdbcType="VARCHAR"/>
+        <result property="typeid" column="typeid" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="attra" column="attra" jdbcType="VARCHAR"/>
+        <result property="attrb" column="attrb" jdbcType="VARCHAR"/>
+        <result property="attrc" column="attrc" jdbcType="VARCHAR"/>
+        <result property="attrd" column="attrd" jdbcType="VARCHAR"/>
+        <result property="attre" column="attre" jdbcType="VARCHAR"/>
+        <result property="attrf" column="attrf" jdbcType="VARCHAR"/>
+        <result property="attrg" column="attrg" jdbcType="VARCHAR"/>
+        <result property="attrh" column="attrh" jdbcType="VARCHAR"/>
+        <result property="attri" column="attri" jdbcType="VARCHAR"/>
+        <result property="attrj" column="attrj" jdbcType="VARCHAR"/>
+        <result property="attrk" column="attrk" jdbcType="VARCHAR"/>
+        <result property="attrl" column="attrl" jdbcType="VARCHAR"/>
+        <result property="attrm" column="attrm" jdbcType="VARCHAR"/>
+        <result property="attrn" column="attrn" jdbcType="VARCHAR"/>
+        <result property="attro" column="attro" jdbcType="VARCHAR"/>
+        <result property="attrp" column="attrp" jdbcType="VARCHAR"/>
+        <result property="attrq" column="attrq" jdbcType="VARCHAR"/>
+        <result property="attrr" column="attrr" jdbcType="VARCHAR"/>
+        <result property="attrs" column="attrs" jdbcType="VARCHAR"/>
+        <result property="attrt" column="attrt" jdbcType="VARCHAR"/>
+        <result property="attru" column="attru" jdbcType="VARCHAR"/>
+        <result property="attrv" column="attrv" jdbcType="VARCHAR"/>
+        <result property="attrw" column="attrw" jdbcType="VARCHAR"/>
+        <result property="attrx" column="attrx" jdbcType="VARCHAR"/>
+        <result property="attry" column="attry" jdbcType="VARCHAR"/>
+        <result property="attrz" column="attrz" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="usingdep" column="usingdep" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+        <result property="isexternal" column="isexternal" jdbcType="INTEGER"/>
+        <result property="externalurl" column="externalurl" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,htmlfrom,typeid,
+        create_time,remark,attra,
+        attrb,attrc,attrd,
+        attre,attrf,attrg,
+        attrh,attri,attrj,
+        attrk,attrl,attrm,
+        attrn,attro,attrp,
+        attrq,attrr,attrs,
+        attrt,attru,attrv,
+        attrw,attrx,attry,
+        attrz,name,usingdep,
+        state,isexternal,externalurl
+    </sql>
+    <insert id="insert" parameterType="SysFlowForm">
+        insert into sys_flow_form(
+        <if test="id !=null and id !=''">id,</if>
+        <if test="htmlfrom !=null and htmlfrom !=''">htmlfrom,</if>
+        <if test="typeid !=null and typeid !=''">typeid,</if>
+        <if test="remark !=null and remark !=''">remark,</if>
+        <if test="attra !=null and attra !=''">attra,</if>
+        <if test="attrb !=null and attrb !=''">attrb,</if>
+        <if test="attrc !=null and attrc !=''">attrc,</if>
+        <if test="attrd !=null and attrd !=''">attrd,</if>
+        <if test="attre !=null and attre !=''">attre,</if>
+        <if test="attrf !=null and attrf !=''">attrf,</if>
+        <if test="attrg !=null and attrg !=''">attrg,</if>
+        <if test="attrh !=null and attrh !=''">attrh,</if>
+        <if test="attri !=null and attri !=''">attri,</if>
+        <if test="attrj !=null and attrj !=''">attrj,</if>
+        <if test="attrk !=null and attrk !=''">attrk,</if>
+        <if test="attrl !=null and attrl !=''">attrl,</if>
+        <if test="attrm !=null and attrm !=''">attrm,</if>
+        <if test="attrn !=null and attrn !=''">attrn,</if>
+        <if test="attro !=null and attro !=''">attro,</if>
+        <if test="attrp !=null and attrp !=''">attrp,</if>
+        <if test="attrq !=null and attrq !=''">attrq,</if>
+        <if test="attrr !=null and attrr !=''">attrr,</if>
+        <if test="attrs !=null and attrs !=''">attrs,</if>
+        <if test="attrt !=null and attrt !=''">attrt,</if>
+        <if test="attru !=null and attru !=''">attru,</if>
+        <if test="attrv !=null and attrv !=''">attrv,</if>
+        <if test="attrw !=null and attrw !=''">attrw,</if>
+        <if test="attrx !=null and attrx !=''">attrx,</if>
+        <if test="attry !=null and attry !=''">attry,</if>
+        <if test="attrz !=null and attrz !=''">attrz,</if>
+        <if test="name !=null and name !=''">name,</if>
+        <if test="usingdep !=null and usingdep !=''">usingdep,</if>
+        <if test="state !=null and state !=0">state,</if>
+        <if test="isexternal !=null and isexternal !=0">isexternal,</if>
+        <if test="externalurl !=null and externalurl !=''">externalurl,</if>
+        create_time
+        )values(
+        <if test="id !=null and id !=''">#{id},</if>
+        <if test="htmlfrom !=null and htmlfrom !=''">#{htmlfrom},</if>
+        <if test="typeid !=null and typeid !=''">#{typeid},</if>
+        <if test="remark !=null and remark !=''">#{remark},</if>
+        <if test="attra !=null and attra !=''">#{attra},</if>
+        <if test="attrb !=null and attrb !=''">#{attrb},</if>
+        <if test="attrc !=null and attrc !=''">#{attrc},</if>
+        <if test="attrd !=null and attrd !=''">#{attrd},</if>
+        <if test="attre !=null and attre !=''">#{attre},</if>
+        <if test="attrf !=null and attrf !=''">#{attrf},</if>
+        <if test="attrg !=null and attrg !=''">#{attrg},</if>
+        <if test="attrh !=null and attrh !=''">#{attrh},</if>
+        <if test="attri !=null and attri !=''">#{attri},</if>
+        <if test="attrj !=null and attrj !=''">#{attrj},</if>
+        <if test="attrk !=null and attrk !=''">#{attrk},</if>
+        <if test="attrl !=null and attrl !=''">#{attrl},</if>
+        <if test="attrm !=null and attrm !=''">#{attrm},</if>
+        <if test="attrn !=null and attrn !=''">#{attrn},</if>
+        <if test="attro !=null and attro !=''">#{attro},</if>
+        <if test="attrp !=null and attrp !=''">#{attrp},</if>
+        <if test="attrq !=null and attrq !=''">#{attrq},</if>
+        <if test="attrr !=null and attrr !=''">#{attrr},</if>
+        <if test="attrs !=null and attrs !=''">#{attrs},</if>
+        <if test="attrt !=null and attrt !=''">#{attrt},</if>
+        <if test="attru !=null and attru !=''">#{attru},</if>
+        <if test="attrv !=null and attrv !=''">#{attrv},</if>
+        <if test="attrw !=null and attrw !=''">#{attrw},</if>
+        <if test="attrx !=null and attrx !=''">#{attrx},</if>
+        <if test="attry !=null and attry !=''">#{attry},</if>
+        <if test="attrz !=null and attrz !=''">#{attrz},</if>
+        <if test="name !=null and name !=''">#{name},</if>
+        <if test="usingdep !=null and usingdep !=''">#{usingdep},</if>
+        <if test="state !=null and state !=0">#{state},</if>
+        <if test="isexternal !=null and isexternal !=0">#{isexternal},</if>
+        <if test="externalurl !=null and externalurl !=''">#{externalurl},</if>
+        #{createTime}
+        )
+    </insert>
+    <update id="update" parameterType="String">
+        update sys_flow_form
+        <set>
+            <if test="id !=null and id !=''">id=#{id},</if>
+            <if test="htmlfrom !=null and htmlfrom !=''">htmlfrom=#{htmlfrom},</if>
+            <if test="typeid !=null and typeid !=''">typeid=#{typeid},</if>
+            <if test="remark !=null and remark !=''">remark=#{remark},</if>
+            <if test="attra !=null and attra !=''">attra=#{attra},</if>
+            <if test="attrb !=null and attrb !=''">attrb=#{attrb},</if>
+            <if test="attrc !=null and attrc !=''">attrc=#{attrc},</if>
+            <if test="attrd !=null and attrd !=''">attrd=#{attrd},</if>
+            <if test="attre !=null and attre !=''">attre=#{attre},</if>
+            <if test="attrf !=null and attrf !=''">attrf=#{attrf},</if>
+            <if test="attrg !=null and attrg !=''">attrg=#{attrg},</if>
+            <if test="attrh !=null and attrh !=''">attrh=#{attrh},</if>
+            <if test="attri !=null and attri !=''">attri=#{attri},</if>
+            <if test="attrj !=null and attrj !=''">attrj=#{attrj},</if>
+            <if test="attrk !=null and attrk !=''">attrk=#{attrk},</if>
+            <if test="attrl !=null and attrl !=''">attrl=#{attrl},</if>
+            <if test="attrm !=null and attrm !=''">attrm=#{attrm},</if>
+            <if test="attrn !=null and attrn !=''">attrn=#{attrn},</if>
+            <if test="attro !=null and attro !=''">attro=#{attro},</if>
+            <if test="attrp !=null and attrp !=''">attrp=#{attrp},</if>
+            <if test="attrq !=null and attrq !=''">attrq=#{attrq},</if>
+            <if test="attrr !=null and attrr !=''">attrr=#{attrr},</if>
+            <if test="attrs !=null and attrs !=''">attrs=#{attrs},</if>
+            <if test="attrt !=null and attrt !=''">attrt=#{attrt},</if>
+            <if test="attru !=null and attru !=''">attru=#{attru},</if>
+            <if test="attrv !=null and attrv !=''">attrv=#{attrv},</if>
+            <if test="attrw !=null and attrw !=''">attrw=#{attrw},</if>
+            <if test="attrx !=null and attrx !=''">attrx=#{attrx},</if>
+            <if test="attry !=null and attry !=''">attry=#{attry},</if>
+            <if test="attrz !=null and attrz !=''">attrz=#{attrz},</if>
+            <if test="name !=null and name !=''">name=#{name},</if>
+            <if test="usingdep !=null and usingdep !=''">usingdep=#{usingdep},</if>
+            <if test="state !=null and state !=0">state=#{state},</if>
+            <if test="isexternal !=null and isexternal !=0">isexternal=#{isexternal},</if>
+            <if test="externalurl !=null and externalurl !=''">externalurl=#{externalurl},</if>
+            create_time=#{createTime}
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteById" parameterType="String">
+        delete
+        from sys_flow_form
+        where id = #{id}
+    </delete>
+    <select id="queryById" resultType="com.jeethink.project.dynamic.domain.SysFlowForm"></select>
+    <select id="queryAllByLimit" resultType="com.jeethink.project.dynamic.domain.SysFlowForm"></select>
+    <select id="queryAll" parameterType="SysFlowForm" resultMap="BaseResultMap">
+        select t.id,t.htmlfrom,t.typeid,
+        t.create_time,t.remark,t.attra,
+        t.attrb,t.attrc,t.attrd,
+        t.attre,t.attrf,t.attrg,
+        t.attrh,t.attri,t.attrj,
+        t.attrk,t.attrl,t.attrm,
+        t.attrn,t.attro,t.attrp,
+        t.attrq,t.attrr,t.attrs,
+        t.attrt,t.attru,t.attrv,
+        t.attrw,t.attrx,t.attry,
+        t.attrz,t.name,t.usingdep,
+        t.state,t.isexternal,t.externalurl,f.name as typ
+        from sys_flow_form t,sys_flow_type f
+        <where>
+            <if test="id != null and id != 0">
+                AND id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                AND name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>
