@@ -47,6 +47,6 @@ public interface SysFlowFormattrService {
      * @param id 主键
      * @return 是否成功
      */
-    int deleteById(String id);
+    int deleteById(String[] id);
 
 }

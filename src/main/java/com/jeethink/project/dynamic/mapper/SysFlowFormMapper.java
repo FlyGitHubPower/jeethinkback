@@ -1,17 +1,13 @@
 package com.jeethink.project.dynamic.mapper;
 
+import com.jeethink.project.dynamic.domain.FormType;
 import com.jeethink.project.dynamic.domain.SysFlowForm;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 public interface SysFlowFormMapper {
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    SysFlowForm queryById(String id);
+
+    List<FormType> queryById(FormType formType);
 
     /**
      * 查询指定行数据
@@ -20,7 +16,7 @@ public interface SysFlowFormMapper {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<SysFlowForm> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+//    List<SysFlowForm> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
@@ -53,6 +49,6 @@ public interface SysFlowFormMapper {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(String id);
+    int deleteById(String[] id);
 
 }

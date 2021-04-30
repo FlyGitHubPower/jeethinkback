@@ -1,5 +1,7 @@
 package com.jeethink.project.dynamic.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +20,7 @@ public class SysFlowForm implements Serializable {
     /**
      * 创建时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     /**
      * 备注
@@ -387,4 +390,46 @@ public class SysFlowForm implements Serializable {
         this.externalurl = externalurl;
     }
 
+    @Override
+    public String toString() {
+        return "SysFlowForm{" +
+                "id='" + id + '\'' +
+                ", htmlfrom='" + htmlfrom + '\'' +
+                ", typeid='" + typeid + '\'' +
+                ", createTime=" + createTime +
+                ", remark='" + remark + '\'' +
+                ", attra='" + attra + '\'' +
+                ", attrb='" + attrb + '\'' +
+                ", attrc='" + attrc + '\'' +
+                ", attrd='" + attrd + '\'' +
+                ", attre='" + attre + '\'' +
+                ", attrf='" + attrf + '\'' +
+                ", attrg='" + attrg + '\'' +
+                ", attrh='" + attrh + '\'' +
+                ", attri='" + attri + '\'' +
+                ", attrj='" + attrj + '\'' +
+                ", attrk='" + attrk + '\'' +
+                ", attrl='" + attrl + '\'' +
+                ", attrm='" + attrm + '\'' +
+                ", attrn='" + attrn + '\'' +
+                ", attro='" + attro + '\'' +
+                ", attrp='" + attrp + '\'' +
+                ", attrq='" + attrq + '\'' +
+                ", attrr='" + attrr + '\'' +
+                ", attrs='" + attrs + '\'' +
+                ", attrt='" + attrt + '\'' +
+                ", attru='" + attru + '\'' +
+                ", attrv='" + attrv + '\'' +
+                ", attrw='" + attrw + '\'' +
+                ", attrx='" + attrx + '\'' +
+                ", attry='" + attry + '\'' +
+                ", attrz='" + attrz + '\'' +
+                ", name='" + name + '\'' +
+                ", usingdep='" + usingdep + '\'' +
+                ", state=" + state +
+                ", isexternal=" + isexternal +
+                ", externalurl='" + externalurl + '\'' +
+                ", typ='" + typ + '\'' +
+                '}';
+    }
 }

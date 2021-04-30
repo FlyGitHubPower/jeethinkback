@@ -1,5 +1,6 @@
 package com.jeethink.project.dynamic.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.jeethink.framework.web.domain.BaseEntity;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ public class SysFlowType extends BaseEntity {
     private String name;
     private String remark;
     private Integer sort;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date create_time;
 
     public Integer getSort() {

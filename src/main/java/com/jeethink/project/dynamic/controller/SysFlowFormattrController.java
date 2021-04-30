@@ -31,8 +31,14 @@ public class SysFlowFormattrController extends BaseController{
         return this.sysFlowFormattrService.queryById(id);
     }
 
+    @GetMapping("/selectAttr")
+    public AjaxResult selectattr(@RequestBody SysFlowFormattr sysFlowFormattr) {
+        List<SysFlowFormattr> flowmAttr = sysFlowFormattrService.queryAll(sysFlowFormattr);
+        return AjaxResult.success(flowmAttr);
+    }
+
     @GetMapping("/selectAll")
-    public AjaxResult selectAll( SysFlowFormattr sysFlowFormattr) {
+    public AjaxResult selectAll(SysFlowFormattr sysFlowFormattr) {
         List<SysFlowFormattr> flowmAttr = sysFlowFormattrService.queryAll(sysFlowFormattr);
         return AjaxResult.success(flowmAttr);
     }
@@ -43,7 +49,7 @@ public class SysFlowFormattrController extends BaseController{
     }
 
     @DeleteMapping("/{id}")
-    public AjaxResult remove(@PathVariable String id) {
+    public AjaxResult remove(@PathVariable String[] id) {
         return toAjax(sysFlowFormattrService.deleteById(id));
     }
 

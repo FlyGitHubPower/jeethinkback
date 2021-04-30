@@ -41,6 +41,16 @@
         <result property="state" column="state" jdbcType="INTEGER"/>
         <result property="isexternal" column="isexternal" jdbcType="INTEGER"/>
         <result property="externalurl" column="externalurl" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <resultMap id="BaseResultMap1" type="FormType">
+        <result property="typename" column="typename" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="formid" column="formid" jdbcType="VARCHAR"/>
+        <result property="typeid" column="typeid" jdbcType="VARCHAR"/>
+        <result property="formname" column="formname" jdbcType="VARCHAR"/>
+
+
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -91,8 +101,8 @@
         <if test="attrz !=null and attrz !=''">attrz,</if>
         <if test="name !=null and name !=''">name,</if>
         <if test="usingdep !=null and usingdep !=''">usingdep,</if>
-        <if test="state !=null and state !=0">state,</if>
-        <if test="isexternal !=null and isexternal !=0">isexternal,</if>
+        <if test="state !=null">state,</if>
+        <if test="isexternal !=null">isexternal,</if>
         <if test="externalurl !=null and externalurl !=''">externalurl,</if>
         create_time
         )values(
@@ -128,8 +138,8 @@
         <if test="attrz !=null and attrz !=''">#{attrz},</if>
         <if test="name !=null and name !=''">#{name},</if>
         <if test="usingdep !=null and usingdep !=''">#{usingdep},</if>
-        <if test="state !=null and state !=0">#{state},</if>
-        <if test="isexternal !=null and isexternal !=0">#{isexternal},</if>
+        <if test="state !=null">#{state},</if>
+        <if test="isexternal !=null">#{isexternal},</if>
         <if test="externalurl !=null and externalurl !=''">#{externalurl},</if>
         #{createTime}
         )
@@ -169,8 +179,8 @@
             <if test="attrz !=null and attrz !=''">attrz=#{attrz},</if>
             <if test="name !=null and name !=''">name=#{name},</if>
             <if test="usingdep !=null and usingdep !=''">usingdep=#{usingdep},</if>
-            <if test="state !=null and state !=0">state=#{state},</if>
-            <if test="isexternal !=null and isexternal !=0">isexternal=#{isexternal},</if>
+            <if test="state !=null">state=#{state},</if>
+            <if test="isexternal !=null">isexternal=#{isexternal},</if>
             <if test="externalurl !=null and externalurl !=''">externalurl=#{externalurl},</if>
             create_time=#{createTime}
         </set>
@@ -179,10 +189,18 @@
     <delete id="deleteById" parameterType="String">
         delete
         from sys_flow_form
-        where id = #{id}
+        where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
     </delete>
-    <select id="queryById" resultType="com.jeethink.project.dynamic.domain.SysFlowForm"></select>
-    <select id="queryAllByLimit" resultType="com.jeethink.project.dynamic.domain.SysFlowForm"></select>
+    <select id="queryById" parameterType="FormType" resultMap="BaseResultMap1">
+        select a.name as typename,a.remark,t.name as formname,a.id as typeid,t.id as formid from sys_flow_type a
+        INNER JOIN sys_flow_form t on t.typeid=a.id
+    </select>
+<!--    <select id="queryAllByLimit" resultType="com.jeethink.project.dynamic.domain.SysFlowForm">-->
+<!--        select t.name as typename,t.remark,f.name as formname from sys_flow_form f,sys_flow_type t where f.typeid=t.id-->
+<!--    </select>-->
     <select id="queryAll" parameterType="SysFlowForm" resultMap="BaseResultMap">
         select t.id,t.htmlfrom,t.typeid,
         t.create_time,t.remark,t.attra,
@@ -198,11 +216,15 @@
         t.state,t.isexternal,t.externalurl,f.name as typ
         from sys_flow_form t,sys_flow_type f
         <where>
+            AND t.typeid=f.id
             <if test="id != null and id != 0">
-                AND id = #{id}
+                AND t.id = #{id}
             </if>
             <if test="name != null and name != ''">
-                AND name like concat('%', #{name}, '%')
+                AND t.name like concat('%', #{name}, '%')
+            </if>
+            <if test="typeid != null and typeid != 0">
+                AND t.typeid = #{typeid}
             </if>
         </where>
     </select>

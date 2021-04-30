@@ -76,7 +76,7 @@ public class SysFlowFormattrServiceImpl implements SysFlowFormattrService {
      * @return 是否成功
      */
     @Override
-    public int deleteById(String id) {
+    public int deleteById(String[] id) {
         return sysFlowFormattrMapper.deleteById(id);
     }
 }

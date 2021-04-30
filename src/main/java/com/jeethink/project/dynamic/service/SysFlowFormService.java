@@ -1,7 +1,9 @@
 package com.jeethink.project.dynamic.service;
 
 
+import com.jeethink.project.dynamic.domain.FormType;
 import com.jeethink.project.dynamic.domain.SysFlowForm;
+import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 
 import java.util.List;
 
@@ -13,22 +15,11 @@ import java.util.List;
  */
 public interface SysFlowFormService {
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    SysFlowForm queryById(String id);
 
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<SysFlowForm> queryAllByLimit(int offset, int limit);
+    List queryById(FormType formType);
+
+    List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr);
+//    Map queryAllByLimit(SysFlowForm sysFlowForm);
     List<SysFlowForm> queryAll(SysFlowForm sysFlowForm);
     /**
      * 新增数据
@@ -52,6 +43,6 @@ public interface SysFlowFormService {
      * @param id 主键
      * @return 是否成功
      */
-    int deleteById(String id);
+    int deleteById(String[] id);
 
 }

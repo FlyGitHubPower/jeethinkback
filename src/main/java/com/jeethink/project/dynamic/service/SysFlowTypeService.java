@@ -10,5 +10,5 @@ public interface SysFlowTypeService {
     public List<SysFlowType> selectType(SysFlowType type);
     public int insertType(SysFlowType type);
     public int updateType(SysFlowType type);
-    public int deleteTypeById(String id);
+    public int deleteTypeById(String[] id);
 }

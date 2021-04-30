@@ -8,18 +8,22 @@
             <option name="annotationType" value="NONE" />
             <option name="basePackage" value="22222" />
             <option name="basePath" value="src/main/java" />
-            <option name="domainObjectName" value="SysFlowForm" />
+            <option name="domainObjectName" value="SysFlowFormcontent" />
             <option name="encoding" value="UTF-8" />
             <option name="extraTemplateNames">
               <list>
+                <option value="mapperInterface" />
                 <option value="mapperXml" />
+                <option value="serviceImpl" />
+                <option value="serviceInterface" />
               </list>
             </option>
             <option name="moduleName" value="jeethink" />
             <option name="modulePath" value="$PROJECT_DIR$/" />
+            <option name="needToStringHashcodeEquals" value="true" />
             <option name="relativePackage" value="domain" />
             <option name="rootClass" value="" />
-            <option name="tableName" value="sys_flow_form" />
+            <option name="tableName" value="sys_flow_formcontent" />
             <option name="targetProject" value="$PROJECT_DIR$" />
             <option name="templatesName" value="mybatis-plus2" />
           </GenerateConfig>

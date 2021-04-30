@@ -8,6 +8,6 @@ public interface SysFlowTypeMapper {
     public List<SysFlowType> selectFormList(SysFlowType type);
     public int insertType(SysFlowType type);
     public int updateType(SysFlowType type);
-    public int deleteTypeById(String id);
+    public int deleteTypeById(String[] id);
     List<SysFlowType> selectFormType(SysFlowType type);
 }

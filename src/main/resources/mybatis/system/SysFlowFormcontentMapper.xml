@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.project.dynamic.mapper.SysFlowFormcontentMapper">
+
+    <resultMap id="BaseResultMap" type="com.jeethink.project.dynamic.domain.SysFlowFormcontent">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="formid" column="formid" jdbcType="VARCHAR"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateBy" column="update_by" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="attra" column="attra" jdbcType="VARCHAR"/>
+        <result property="attrb" column="attrb" jdbcType="VARCHAR"/>
+        <result property="attrc" column="attrc" jdbcType="VARCHAR"/>
+        <result property="attrd" column="attrd" jdbcType="VARCHAR"/>
+        <result property="attre" column="attre" jdbcType="VARCHAR"/>
+        <result property="attrf" column="attrf" jdbcType="VARCHAR"/>
+        <result property="attrg" column="attrg" jdbcType="VARCHAR"/>
+        <result property="attrh" column="attrh" jdbcType="VARCHAR"/>
+        <result property="attri" column="attri" jdbcType="VARCHAR"/>
+        <result property="attrj" column="attrj" jdbcType="VARCHAR"/>
+        <result property="attrk" column="attrk" jdbcType="VARCHAR"/>
+        <result property="attrl" column="attrl" jdbcType="VARCHAR"/>
+        <result property="attrm" column="attrm" jdbcType="VARCHAR"/>
+        <result property="attrn" column="attrn" jdbcType="VARCHAR"/>
+        <result property="attro" column="attro" jdbcType="VARCHAR"/>
+        <result property="attrp" column="attrp" jdbcType="VARCHAR"/>
+        <result property="attrq" column="attrq" jdbcType="VARCHAR"/>
+        <result property="attrr" column="attrr" jdbcType="VARCHAR"/>
+        <result property="attrs" column="attrs" jdbcType="VARCHAR"/>
+        <result property="attrt" column="attrt" jdbcType="VARCHAR"/>
+        <result property="attru" column="attru" jdbcType="VARCHAR"/>
+        <result property="attrv" column="attrv" jdbcType="VARCHAR"/>
+        <result property="attrw" column="attrw" jdbcType="VARCHAR"/>
+        <result property="attrx" column="attrx" jdbcType="VARCHAR"/>
+        <result property="attry" column="attry" jdbcType="VARCHAR"/>
+        <result property="attrz" column="attrz" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="formlevel" column="formlevel" jdbcType="VARCHAR"/>
+        <result property="isdelete" column="isdelete" jdbcType="INTEGER"/>
+        <result property="timeout" column="timeout" jdbcType="TIMESTAMP"/>
+        <result property="userid" column="userid" jdbcType="VARCHAR"/>
+        <result property="projectid" column="projectid" jdbcType="VARCHAR"/>
+        <result property="custommember" column="custommember" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,formid,create_by,
+        create_time,update_by,update_time,
+        remark,attra,attrb,
+        attrc,attrd,attre,
+        attrf,attrg,attrh,
+        attri,attrj,attrk,
+        attrl,attrm,attrn,
+        attro,attrp,attrq,
+        attrr,attrs,attrt,
+        attru,attrv,attrw,
+        attrx,attry,attrz,
+        name,formlevel,isdelete,
+        timeout,userid,projectid,
+        custommember
+    </sql>
+
+    <insert id="insert" parameterType="SysFlowFormcontent">
+        insert into sys_flow_formcontent(
+        <if test="id !=null and id !=0">id,</if>
+        <if test="formid !=null and formid !=''">formid,</if>
+        <if test="createBy !=null and createBy !=''">create_by,</if>
+        <if test="updateBy !=null and updateBy !=''">update_by,</if>
+        <if test="remark !=null and remark !=''">remark,</if>
+        <if test="name !=null and name !=''">name,</if>
+        <if test="formlevel !=null and formlevel !=''">formlevel,</if>
+        <if test="isdelete !=null and isdelete !=''">isdelete,</if>
+        <if test="userid !=null and userid !=''">userid,</if>
+        <if test="projectid !=null and projectid !=''">projectid,</if>
+        <if test="custommember !=null and custommember !=''">custommember,</if>
+        <if test="attra !=null and attra !=''">attra,</if>
+        <if test="attrb !=null and attrb !=''">attrb,</if>
+        <if test="attrc !=null and attrc !=''">attrc,</if>
+        <if test="attrd !=null and attrd !=''">attrd,</if>
+        <if test="attre !=null and attre !=''">attre,</if>
+        <if test="attrf !=null and attrf !=''">attrf,</if>
+        <if test="attrg !=null and attrg !=''">attrg,</if>
+        <if test="attrh !=null and attrh !=''">attrh,</if>
+        <if test="attri !=null and attri !=''">attri,</if>
+        <if test="attrj !=null and attrj !=''">attrj,</if>
+        <if test="attrk !=null and attrk !=''">attrk,</if>
+        <if test="attrl !=null and attrl !=''">attrl,</if>
+        <if test="attrm !=null and attrm !=''">attrm,</if>
+        <if test="attrn !=null and attrn !=''">attrn,</if>
+        <if test="attro !=null and attro !=''">attro,</if>
+        <if test="attrp !=null and attrp !=''">attrp,</if>
+        <if test="attrq !=null and attrq !=''">attrq,</if>
+        <if test="attrr  !=null and attrr !=''">attrr,</if>
+        <if test="attrs !=null and attrs !=''">attrs,</if>
+        <if test="attrt !=null and attrt !=''">attrt,</if>
+        <if test="attru !=null and attru !=''">attru,</if>
+        <if test="attrv !=null and attrv !=''">attrv,</if>
+        <if test="attrw !=null and attrw !=''">attrw,</if>
+        <if test="attrx !=null and attrx !=''">attrx,</if>
+        <if test="attry !=null and attry !=''">attry,</if>
+        <if test="attrz !=null and attrz !=''">attrz,</if>
+        update_time,
+        timeout,
+        create_time
+        )values(
+        <if test="id !=null and id !=0">#{id},</if>
+        <if test="formid !=null and formid !=''">#{formid},</if>
+        <if test="createBy !=null and createBy !=''">#{createBy},</if>
+        <if test="updateBy !=null and updateBy !=''">#{updateBy},</if>
+        <if test="remark !=null and remark !=''">#{remark},</if>
+        <if test="name !=null and name !=''">#{name},</if>
+        <if test="formlevel !=null and formlevel !=''">#{formlevel},</if>
+        <if test="isdelete !=null and isdelete !=''">#{isdelete},</if>
+        <if test="userid !=null and userid !=''">#{userid},</if>
+        <if test="projectid !=null and projectid !=''">#{projectid},</if>
+        <if test="custommember !=null and custommember !=''">#{custommember},</if>
+        <if test="attra !=null and attra !=''">#{attra},</if>
+        <if test="attrb !=null and attrb !=''">#{attrb},</if>
+        <if test="attrc !=null and attrc !=''">#{attrc},</if>
+        <if test="attrd !=null and attrd !=''">#{attrd},</if>
+        <if test="attre !=null and attre !=''">#{attre},</if>
+        <if test="attrf !=null and attrf !=''">#{attrf},</if>
+        <if test="attrg !=null and attrg !=''">#{attrg},</if>
+        <if test="attrh !=null and attrh !=''">#{attrh},</if>
+        <if test="attri !=null and attri !=''">#{attri},</if>
+        <if test="attrj !=null and attrj !=''">#{attrj},</if>
+        <if test="attrk !=null and attrk !=''">#{attrk},</if>
+        <if test="attrl !=null and attrl !=''">#{attrl},</if>
+        <if test="attrm !=null and attrm !=''">#{attrm},</if>
+        <if test="attrn !=null and attrn !=''">#{attrn},</if>
+        <if test="attro !=null and attro !=''">#{attro},</if>
+        <if test="attrp !=null and attrp !=''">#{attrp},</if>
+        <if test="attrq !=null and attrq !=''">#{attrq},</if>
+        <if test="attrr  !=null and attrr !=''">#{attrr},</if>
+        <if test="attrs !=null and attrs !=''">#{attrs},</if>
+        <if test="attrt !=null and attrt !=''">#{attrt},</if>
+        <if test="attru !=null and attru !=''">#{attru},</if>
+        <if test="attrv !=null and attrv !=''">#{attrv},</if>
+        <if test="attrw !=null and attrw !=''">#{attrw},</if>
+        <if test="attrx !=null and attrx !=''">#{attrx},</if>
+        <if test="attry !=null and attry !=''">#{attry},</if>
+        <if test="attrz !=null and attrz !=''">#{attrz},</if>
+        #{updateTime},
+        #{timeout},
+        #{createTime}
+        )
+    </insert>
+    <update id="update"></update>
+    <delete id="deleteById"></delete>
+    <select id="queryById" resultType="com.jeethink.project.dynamic.domain.SysFlowFormcontent"></select>
+    <select id="queryAllByLimit" resultType="com.jeethink.project.dynamic.domain.SysFlowFormcontent"></select>
+
+
+    <select id="queryAll" parameterType="SysFlowFormcontent" resultMap="BaseResultMap">
+        select id,
+               formid,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark,
+               attra,
+               attrb,
+               attrc,
+               attrd,
+               attre,
+               attrf,
+               attrg,
+               attrh,
+               attri,
+               attrj,
+               attrk,
+               attrl,
+               attrm,
+               attrn,
+               attro,
+               attrp,
+               attrq,
+               attrr,
+               attrs,
+               attrt,
+               attru,
+               attrv,
+               attrw,
+               attrx,
+               attry,
+               attrz,
+               name,
+               formlevel,
+               isdelete,
+               timeout,
+               userid,
+               projectid,
+               custommember
+        from sys_flow_formcontent
+        <where>
+            <if test="formid != null and formid != 0">
+                AND formid = #{formid}
+            </if>
+        </where>
+    </select>
+</mapper>

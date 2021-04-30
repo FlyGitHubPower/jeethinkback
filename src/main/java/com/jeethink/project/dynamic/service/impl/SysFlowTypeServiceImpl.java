@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,22 +25,7 @@ public class SysFlowTypeServiceImpl implements SysFlowTypeService {
 
     @Override
     public List<SysFlowType> selectTypeList(SysFlowType type) {
-//        List<SysFlowType> type1 = sysFlowTypeMapper.selectFormList(type);
-//        for (SysFlowType str : type1) {
-//            System.out.println(str.getCreate_time());
-//            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String format = sd.format(str.getCreate_time());
-//            System.out.println(format);
-//            str.setCreate_time(Timestamp.valueOf(format));
-//            str.setId(str.getId());
-//            str.setRemark(str.getRemark());
-//            str.setName(str.getName());
-//            str.setSort(str.getSort());
-//            System.out.println(format);
-//            System.out.println(str.toString());
-//        }
-//        return type1;
-        return sysFlowTypeMapper.selectFormList(type);
+   return sysFlowTypeMapper.selectFormList(type);
     }
 
     @Override
@@ -66,7 +52,7 @@ public class SysFlowTypeServiceImpl implements SysFlowTypeService {
     }
 
     @Override
-    public int deleteTypeById(String id) {
+    public int deleteTypeById(String[] id) {
         return sysFlowTypeMapper.deleteTypeById(id);
     }
 }

@@ -52,7 +52,7 @@ public class SysFlowTypeController extends BaseController {
     //    @PreAuthorize("@ss.hasPermi('system:dynamic:add')")
     @Log(title = "事件管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{id}")
-    public AjaxResult remove(@PathVariable String id) {
+    public AjaxResult remove(@PathVariable String[] id) {
         return toAjax(typeService.deleteTypeById(id));
     }
 }
