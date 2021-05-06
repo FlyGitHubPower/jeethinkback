@@ -197,6 +197,14 @@
     <select id="queryById" parameterType="FormType" resultMap="BaseResultMap1">
         select a.name as typename,a.remark,t.name as formname,a.id as typeid,t.id as formid from sys_flow_type a
         INNER JOIN sys_flow_form t on t.typeid=a.id
+        <where>
+            <if test="typename!=null and typename!=''">
+                and  a.name=#{typename}
+            </if>
+            <if test="remark!=null and remark!=''">
+                and  a.remark=#{remark}
+            </if>
+        </where>
     </select>
 <!--    <select id="queryAllByLimit" resultType="com.jeethink.project.dynamic.domain.SysFlowForm">-->
 <!--        select t.name as typename,t.remark,f.name as formname from sys_flow_form f,sys_flow_type t where f.typeid=t.id-->
