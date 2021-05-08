@@ -8,6 +8,7 @@ import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 import com.jeethink.project.dynamic.service.SysFlowFormService;
 import com.jeethink.project.dynamic.service.SysFlowFormattrService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class SysFlowFormController extends BaseController{
 //    @GetMapping("/selecthtml")
     @GetMapping("/selecthtml/{formid}")
 //    public AjaxResult selectHtml(SysFlowForm sysFlowForm,SysFlowFormattr sysFlowFormattr) {
-    public AjaxResult selectHtml(SysFlowForm sysFlowForm,SysFlowFormattr sysFlowFormattr,@PathVariable(value = "formid") String formid) {
+    public AjaxResult selectHtml(SysFlowForm sysFlowForm,SysFlowFormattr sysFlowFormattr,@PathVariable(value = "formid") String[] formid) {
         List onehtml=sysFlowFormService.queryHtml(sysFlowForm,sysFlowFormattr,formid);
 //        List onehtml=sysFlowFormService.queryHtml(sysFlowForm,sysFlowFormattr);
         return AjaxResult.success(onehtml);
@@ -98,6 +99,13 @@ public class SysFlowFormController extends BaseController{
 
     @PutMapping
     public AjaxResult update(@RequestBody SysFlowForm sysFlowForm) {
+        if (sysFlowForm.getHtmlfrom()!=null) {
+            String s= sysFlowForm.getHtmlfrom();
+            String newString = s.replace("~~~", "<").replace("~hh", ">");
+            System.out.println(newString);
+            sysFlowForm.setHtmlfrom(newString);
+        }
+
         return toAjax(sysFlowFormService.update(sysFlowForm));
     }
 }

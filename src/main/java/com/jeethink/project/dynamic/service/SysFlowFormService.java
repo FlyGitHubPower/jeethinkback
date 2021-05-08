@@ -19,7 +19,7 @@ public interface SysFlowFormService {
     List queryById(FormType formType);
 
 //    List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr);
-    List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr,String formid);
+    List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr,String[] formid);
 //    Map queryAllByLimit(SysFlowForm sysFlowForm);
     List<SysFlowForm> queryAll(SysFlowForm sysFlowForm);
     /**

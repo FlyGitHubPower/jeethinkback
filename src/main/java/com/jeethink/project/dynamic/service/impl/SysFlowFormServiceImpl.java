@@ -12,6 +12,7 @@ import lombok.val;
 import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -31,19 +32,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
     @Autowired
     private IdWorker idWorker;
 
-//        "typeid": "200",
-//        "typename": "政策相关",
-//        "remark": "政策相关de"
 
-
-    //        "formname": "请假条",
-//        "formid": "1384419407308132352",
-
-    //    [{
-//                name:"",
-//                remark:":",
-//                list:[{name:"倾教条"，id：""},{}]
-//    }]
     @Override
     public List<Object> queryById(FormType formType) {
         List<String> strings = new ArrayList<>();
@@ -69,99 +58,38 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
         return list;
     }
 
-    //@Override
-    public List queryById1(FormType formType) {
-        List list = new ArrayList();
-        List list1 = new ArrayList();
-        List list2 = new ArrayList();
-        Map<String, Object> map = new HashMap<>();
-        List<FormType> formTypes = sysFlowFormMapper.queryById(null);
-        Set<Object> set = new HashSet<>();
-        for (FormType type : formTypes) {
-
-            String typename = type.getTypename();
-            String remark = type.getRemark();
-            FormType formType1 = new FormType();
-            formType1.setTypename(typename);
-            formType1.setRemark(remark);
-            List<FormType> formTypess = sysFlowFormMapper.queryById(formType1);
-            set.add(formTypess);
-
-        }
-        System.out.println(set);
-        String s = formTypes.toString();
-        System.out.println(s);
-/*        String s = formTypes.toString();
-
-        Map map = new HashMap();
-        Map map1 = new HashMap();
-        Map map2 = new HashMap();
-        Map map3 = new HashMap();
-        for (FormType f : formTypes
-        ) {
-//            if (map.get(f.getTypename() + "," + f.getRemark()) != null) {
-//                map.put(f.getTypename() + "," + f.getRemark(), map.get(f.getTypename() + "," + f.getRemark()) + "," + f.getFormname() + "," + f.getFormid());
-//            } else {
-//                map.put(f.getTypename() + "," + f.getRemark(), f.getFormname() + "," + f.getFormid());
-//            }
-//            System.out.println(map.toString());
-
-
-
-
-            if (map3.get(f.getTypename()) != null) {
-                map1.put("typeName",f.getTypename());
-                map1.put("remark",f.getRemark());
-                map2.put("formName", f.getFormname());
-                map2.put("formId", f.getFormid());
-                list1.add(map2);
-
-                map1.put("list", list1);
-
-            } else {
-                map2.put("formName", f.getFormname());
-                map2.put("formId", f.getFormid());
-                list1.add(map2);
-            }
-
-
-            map3.put(f.getTypename(),1);
-            list2.add(map1.toString());
-            list.add(list2);
-
-
-
-
-//            list.add(map3);
-        }
-
-//        list.add(map);*/
-        return list;
-    }
 
     @Override
-//    public List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr) {
-    public List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr, String formid) {
-        System.out.println(sysFlowForm.toString());
-        System.out.println(sysFlowFormattr.toString());
+    public List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr, String[] formid) {
         List list = new ArrayList();
         List list1 = new ArrayList();
         List list2 = new ArrayList();
-//        List list4 = new ArrayList();
         StringBuilder sb = new StringBuilder();
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
-
-//        sysFlowForm.setId(sysFlowForm.getId());
-        sysFlowForm.setId(formid);
-
+        sysFlowForm.setId(formid[0]);
         List<SysFlowForm> forms = sysFlowFormMapper.queryAll(sysFlowForm);
         SysFlowForm s = forms.get(0);
+
+        if (s.getHtmlfrom()!=null) {
+            String source = s.getHtmlfrom();
+
+            String[] sourceArray = source.split("<script>");
+            String[] sourceArray1 = sourceArray[1].split("</script>");
+            sb2.append(s.getName());
+            sb.append(sourceArray[0]);
+            sb1.append(sourceArray1[0]);
+
+            list1.add(sb);
+            list2.add(sb1);
+            list.add(sb2);
+            list.add(list1);
+            list.add(list2);
+            return list;
+        }
+
+
         sb2.append(s.getName());
-//        for (SysFlowForm s : forms
-//        ) {
-//            if (s.getAttra() != null) {
-//                sysFlowFormattr.setId(s.getAttra());
         List<String> list3 = new ArrayList();
         list3.add(s.getAttra());
         list3.add(s.getAttrb());
@@ -192,75 +120,56 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
         sb = sb.append("<form id='ff' action='#' method='post'>" +
                 "<table>");
         for (int i = 0; i < 26; i++) {
+            Boolean outFlag = true;
             if (list3.get(i) != null) {
+                outFlag = false;
+                char c1 = (char) (i + 97);
+                String idString = "attr" + c1;
                 sysFlowFormattr.setId(list3.get(i));
                 List<SysFlowFormattr> attr = sysFlowFormattrMapper.queryAll(sysFlowFormattr);
-
                 for (SysFlowFormattr sf : attr
                 ) {
+                    String classString = "easyui-textbox";
                     if (sf.getTypes().equals("文本")) {
                         sf.setTypes("text");
-                    } else if (sf.getTypes().equals("字符串")) {
-                        sf.setTypes("String");
+                        classString = "easyui-textbox";
+                    } else if (sf.getTypes().equals("下拉框")) {
+                        sf.setTypes("select");
+                        classString = "easyui-combotreegrid";
                     } else if (sf.getTypes().equals("按钮")) {
                         sf.setTypes("button");
+                        classString = "easyui-textbox";
                     } else if (sf.getTypes().equals("日期")) {
                         sf.setTypes("data");
+                        classString = "easyui-datebox";
+                    } else if (sf.getTypes().equals("文件")) {
+                        sf.setTypes("data");
+                        classString = "easyui-filebox";
+                    }
+                    String dataOptions = "";
+                    if (formid.length != 1) {
+                        sb = sb.append("<tr class='drag-item'>");
+                    } else {
+                        sb = sb.append("<tr>");
+                        dataOptions = "data-options='required:true'";
                     }
 
 
-                    sb = sb.append("<tr class='easyui-draggable'>" +
+                    sb = sb.append(
                             "<td>" + sf.getAlias() + ":</td>" +
-//                                "    <label for='" + sf.getName() + "'>" + sf.getAlias() + ":</label>" +
-                            "    <td><input class='easyui-validatebox' type='" + sf.getTypes() + "' name='" + sf.getName() + "'" +
-                            "        data-options='required:true' /></td>" +
-                            "</tr>");
-
+                                    "    <td><input id='" + idString + "' class='" + classString + "' type='" + sf.getTypes() + "' name='" + sf.getName() + "'" +
+                                    dataOptions +
+                                    "/></td>" +
+                                    "</tr>");
                 }
+            }
+            if (outFlag) {
+                break;
             }
         }
         sb = sb.append("</table>" +
                 "</form>");
 
-//            }
-//            if (s.getHtmlfrom() != null) {
-//                if (s.getAttra() != null) {
-//
-//                }
-//                for (SysFlowFormattr sf:attr
-//                ) {
-//                    if (sf.getId()==s.getAttra()) {
-//                        sb = sb.append("<div>" +
-//                                "    <label for='" + sf.getName() + "'>" + sf.getAlias() + ":</label>" +
-//                                "    <input class='easyui-validatebox' type='" + sf.getTypes() + "' name='" + sf.getName() + "'" +
-//                                "        data-options='required:true' />" +
-//                                "  </div>");
-//                    }
-//                }
-//            }
-//        }
-//        sb = sb.append(attr.toString()+forms.toString());
-
-//        sb = sb.append("<form id='box' method='post'>");
-//        sb = sb.append("<div>" +
-//                "    <label for='"+forf+"'>"+alise+":</label>" +
-//                "    <input class='easyui-validatebox' type='"+type+"' name='"+forf+"'" +
-//                "        data-options='required:true' />" +
-//                "  </div>");
-//
-//
-//        sb = sb.append("<div>" +
-//                "    <label for='name'>Name:</label>" +
-//                "    <input class='easyui-validatebox' type='text' name='name'" +
-//                "        data-options='required:true' />" +
-//                "  </div>");
-//        sb = sb.append("<div>" +
-//                "    <label for='email'>Email:</label>" +
-//                "    <input class='easyui-validatebox' type='text' name='email'" +
-//                "        data-options='validType:'email'' />" +
-//                "  </div>");
-//        sb = sb.append("<input type='submit'>" +
-//                "</form>");
         sb1.append(
                 "$(function () {" +
                         "    $('#box').form({" +
@@ -274,9 +183,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                         "  });"
         );
         list1.add(sb);
-//        }
         list2.add(sb1);
-//        list4.add(sb2);
         list.add(sb2);
         list.add(list1);
         list.add(list2);
@@ -290,27 +197,6 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
         return sysFlowFormMapper.queryAll(sysFlowForm);
     }
 
-
-//    @Override
-//    public Map queryAllByLimit(SysFlowForm sysFlowForm) {
-//        List<String> list = new ArrayList<>();
-//        Map map = new HashMap();
-//        List<SysFlowForm> types = sysFlowFormMapper.queryAll(sysFlowForm);
-//        for (SysFlowForm typess : types
-//        ) {
-//            String sign = typess.getName();
-////            if () {
-////                list.add(sign);
-////            }
-//
-//            map.put(typess.getTyp(), list);
-//
-////                list.add(typess.getTyp());
-////                sign= typess.getTyp();
-//        }
-//
-//        return map;
-//    }
 
     /**
      * 新增数据
@@ -332,6 +218,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
      */
     @Override
     public int update(SysFlowForm sysFlowForm) {
+        System.out.println(sysFlowForm);
         return sysFlowFormMapper.update(sysFlowForm);
     }
 
