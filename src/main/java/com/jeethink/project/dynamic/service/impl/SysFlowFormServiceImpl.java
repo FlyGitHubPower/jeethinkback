@@ -1,6 +1,5 @@
 package com.jeethink.project.dynamic.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.jeethink.common.utils.IdWorker;
 import com.jeethink.project.dynamic.domain.FormType;
 import com.jeethink.project.dynamic.domain.SysFlowForm;
@@ -8,12 +7,8 @@ import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 import com.jeethink.project.dynamic.mapper.SysFlowFormMapper;
 import com.jeethink.project.dynamic.mapper.SysFlowFormattrMapper;
 import com.jeethink.project.dynamic.service.SysFlowFormService;
-import lombok.val;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.util.HtmlUtils;
-
 import javax.annotation.Resource;
 import java.util.*;
 
@@ -72,20 +67,62 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
         SysFlowForm s = forms.get(0);
 
         if (s.getHtmlfrom()!=null) {
+
+            if (formid.length != 1) {
+
             String source = s.getHtmlfrom();
 
             String[] sourceArray = source.split("<script>");
-            String[] sourceArray1 = sourceArray[1].split("</script>");
-            sb2.append(s.getName());
-            sb.append(sourceArray[0]);
-            sb1.append(sourceArray1[0]);
+                boolean status = sourceArray[0].contains("class=\"drag-item droppable\"");
+                if (status) {
+                    String[] sourceArray1 = sourceArray[1].split("</script>");
+                    sb2.append(s.getName());
+                    sb.append(sourceArray[0]);
+                    sb1.append(sourceArray1[0]);
 
-            list1.add(sb);
-            list2.add(sb1);
-            list.add(sb2);
-            list.add(list1);
-            list.add(list2);
-            return list;
+                    list1.add(sb);
+                    list2.add(sb1);
+                    list.add(sb2);
+                    list.add(list1);
+                    list.add(list2);
+                    return list;
+                } else {
+                    String source1 = s.getHtmlfrom();
+
+                    String[] sourceArray2 = source1.split("<script>");
+                    String[] sourceArray1 = sourceArray2[1].split("</script>");
+                    sb2.append(s.getName());
+                    String sAString = sourceArray2[0].replace("<tr","<tr class='drag-item'").replace("data-options=\"required:true\"","readonly='true'");
+                    sb.append(sAString);
+
+                    sb1.append(sourceArray1[0]);
+
+                    list1.add(sb);
+                    list2.add(sb1);
+                    list.add(sb2);
+                    list.add(list1);
+                    list.add(list2);
+                    return list;
+                }
+
+            }else {
+                String source = s.getHtmlfrom();
+
+                String[] sourceArray = source.split("<script>");
+                String[] sourceArray1 = sourceArray[1].split("</script>");
+                sb2.append(s.getName());
+                String sAString = sourceArray[0].replace("class=\"drag-item droppable\"","").replace("readonly=\"true\"","data-options='required:true'");
+                sb.append(sAString);
+
+                sb1.append(sourceArray1[0]);
+
+                list1.add(sb);
+                list2.add(sb1);
+                list.add(sb2);
+                list.add(list1);
+                list.add(list2);
+                return list;
+            }
         }
 
 
@@ -147,8 +184,10 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                         classString = "easyui-filebox";
                     }
                     String dataOptions = "";
+                    String readonly="";
                     if (formid.length != 1) {
                         sb = sb.append("<tr class='drag-item'>");
+                        readonly="readonly='true'";
                     } else {
                         sb = sb.append("<tr>");
                         dataOptions = "data-options='required:true'";
@@ -157,7 +196,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
 
                     sb = sb.append(
                             "<td>" + sf.getAlias() + ":</td>" +
-                                    "    <td><input id='" + idString + "' class='" + classString + "' type='" + sf.getTypes() + "' name='" + sf.getName() + "'" +
+                                    "    <td><input  " + readonly + " name='" + idString + "' class='" + classString + "' type='" + sf.getTypes() +  "'" +
                                     dataOptions +
                                     "/></td>" +
                                     "</tr>");

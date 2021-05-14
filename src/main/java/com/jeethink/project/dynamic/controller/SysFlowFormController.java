@@ -77,12 +77,10 @@ public class SysFlowFormController extends BaseController{
         return AjaxResult.success(flowForms);
     }
 
-//    @GetMapping("/selecthtml")
     @GetMapping("/selecthtml/{formid}")
-//    public AjaxResult selectHtml(SysFlowForm sysFlowForm,SysFlowFormattr sysFlowFormattr) {
+
     public AjaxResult selectHtml(SysFlowForm sysFlowForm,SysFlowFormattr sysFlowFormattr,@PathVariable(value = "formid") String[] formid) {
         List onehtml=sysFlowFormService.queryHtml(sysFlowForm,sysFlowFormattr,formid);
-//        List onehtml=sysFlowFormService.queryHtml(sysFlowForm,sysFlowFormattr);
         return AjaxResult.success(onehtml);
     }
 
@@ -91,11 +89,7 @@ public class SysFlowFormController extends BaseController{
         List<SysFlowForm> flowmAttr = sysFlowFormService.queryAll(sysFlowForm);
         return AjaxResult.success(flowmAttr);
     }
-//    @GetMapping("/queryAllByLimit")
-//    public AjaxResult queryAllByLimit(SysFlowForm sysFlowForm) {
-//        Map flowmAttr = sysFlowFormService.queryAllByLimit(sysFlowForm);
-//        return AjaxResult.success(flowmAttr);
-//    }
+
 
     @PutMapping
     public AjaxResult update(@RequestBody SysFlowForm sysFlowForm) {

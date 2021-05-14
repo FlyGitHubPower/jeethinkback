@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id='ff' action='#' method='post'>
+    <table>
+        <tr class='drag-item'>
+            <td>请假日期:</td>
+            <td><input readonly='true' id='attra' class='easyui-datebox' type='data' name='qjrq'/></td>
+        </tr>
+        <tr class='drag-item'>
+            <td>请假理由:</td>
+            <td><input readonly='true' id='attrb' class='easyui-textbox' type='text' name='1111'/></td>
+        </tr>
+        <tr class='drag-item'>
+            <td>请假去向:</td>
+            <td><input readonly='true' id='attrc' class='easyui-textbox' type='text' name='111'/></td>
+        </tr>
+    </table>
+</form>
+
+
+
+<form id="ff" action="#" method="post">
+    <table>
+        <tbody>
+        <tr class="drag-item droppable" style="">
+            <td>请假理由:</td>
+            <td><input readonly="true" id="attrb" class="easyui-textbox textbox-f" type="text" textboxname="1111"
+                       style="display: none;"><span class="textbox textbox-readonly" style="width: 177px;">
+                <input
+                        id="_easyui_textbox_input1" type="text"
+                        class="textbox-text validatebox-text validatebox-readonly textbox-prompt" autocomplete="off"
+                        tabindex="" readonly="" placeholder=""
+                        style="margin: 0px; padding-top: 0px; padding-bottom: 0px; height: 28px; line-height: 28px; width: 175px;"><input
+                    type="hidden" class="textbox-value" name="1111" value=""></span></td>
+        </tr>
+        <tr class="drag-item droppable" style="">
+            <td>请假去向:</td>
+            <td><input readonly="true" id="attrc" class="easyui-textbox textbox-f" type="text" textboxname="111"
+                       style="display: none;"><span class="textbox textbox-readonly" style="width: 177px;">
+                <input
+                        id="_easyui_textbox_input2" type="text"
+                        class="textbox-text validatebox-text validatebox-readonly textbox-prompt" autocomplete="off"
+                        tabindex="" readonly="" placeholder=""
+                        style="margin: 0px; padding-top: 0px; padding-bottom: 0px; height: 28px; line-height: 28px; width: 175px;"><input
+                    type="hidden" class="textbox-value" name="111" value=""></span></td>
+        </tr>
+        <tr class="drag-item droppable" style="position: static; left: 0px; top: 2px;">
+            <td>请假日期:</td>
+            <td><input readonly="true" id="attra" class="easyui-datebox datebox-f combo-f textbox-f" type="data"
+                       textboxname="qjrq" style="display: none;" comboname="qjrq"><span
+                    class="textbox textbox-readonly combo datebox" style="width: 177px;"><span
+                    class="textbox-addon textbox-addon-right" style="right: 0px; top: 0px;"><a href="javascript:;"
+                                                                                               class="textbox-icon combo-arrow textbox-icon-disabled"
+                                                                                               icon-index="0"
+                                                                                               tabindex="-1"
+                                                                                               style="width: 26px; height: 28px;"></a></span>
+                <input
+                        id="_easyui_textbox_input3" type="data"
+                        class="textbox-text validatebox-text validatebox-readonly textbox-prompt" autocomplete="off"
+                        tabindex="" readonly="" placeholder=""
+                        style="margin: 0px 26px 0px 0px; padding-top: 0px; padding-bottom: 0px; height: 28px; line-height: 28px; width: 149px;"><input
+                        type="hidden" class="textbox-value" name="qjrq" value=""></span></td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<script>$(function () {
+    $('#box').form({
+        url: '#', onSubmit: function () {
+        }, success: function (data) {
+            alert(data);
+        }
+    });
+});</script>
+</body>
+</html>

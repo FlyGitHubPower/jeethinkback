@@ -34,22 +34,19 @@ public class SysFlowTypeController extends BaseController {
         return AjaxResult.success(flowTypes);
     }
 
-//    @PreAuthorize("@ss.hasPermi('system:dynamic:add')")
     @Log(title = "事件管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     public AjaxResult add(@RequestBody SysFlowType formtype) {
         return toAjax(typeService.insertType(formtype));
     }
 
-    //    @PreAuthorize("@ss.hasPermi('system:dynamic:add')")
     @Log(title = "事件管理", businessType = BusinessType.UPDATE)
-//    @PutMapping("/update")
     @PutMapping
     public AjaxResult update(@RequestBody SysFlowType formtype) {
         return toAjax(typeService.updateType(formtype));
     }
 
-    //    @PreAuthorize("@ss.hasPermi('system:dynamic:add')")
+
     @Log(title = "事件管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{id}")
     public AjaxResult remove(@PathVariable String[] id) {

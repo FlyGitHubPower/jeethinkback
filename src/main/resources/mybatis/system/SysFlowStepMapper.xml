@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeethink.project.dynamic.mapper.SysFlowStepMapper">
+
+    <resultMap id="BaseResultMap" type="SysFlowStep">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="sort" column="sort" jdbcType="BIGINT"/>
+        <result property="formid" column="formid" jdbcType="VARCHAR"/>
+        <result property="flowrule" column="flowrule" jdbcType="BIGINT"/>
+        <result property="iscustom" column="iscustom" jdbcType="BIGINT"/>
+        <result property="isallcheck" column="isallcheck" jdbcType="BIGINT"/>
+        <result property="execution" column="execution" jdbcType="VARCHAR"/>
+        <result property="compulsoryover" column="compulsoryover" jdbcType="BIGINT"/>
+        <result property="iseditattr" column="iseditattr" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id
+        ,name,remark,
+        sort,formid,flowrule,
+        iscustom,isallcheck,execution,
+        compulsoryover,iseditattr
+    </sql>
+
+    <select id="queryAll" parameterType="SysFlowFormattr" resultMap="BaseResultMap">
+        select t.id,t.name,t.remark,
+        t.sort,t.formid,t.flowrule,
+        t.iscustom,t.isallcheck,t.execution,
+        t.compulsoryover,t.iseditattr
+        from sys_flow_step t
+        <where>
+            <if test="formid != null and formid != ''">
+                AND t.formid=#{formid}
+            </if>
+            <if test="name != null and name != ''">
+                AND t.name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        order by t.sort asc
+    </select>
+
+    <insert id="insert" parameterType="SysFlowFormattr">
+        insert into sys_flow_step(
+        <if test="id !=null and id !=''">id,</if>
+        <if test="name !=null and name !=''">name,</if>
+        <if test="remark !=null and remark !=''">remark,</if>
+        <if test="sort !=null and sort !='0'">sort,</if>
+        <if test="formid !=null and formid !=''">formid,</if>
+        <if test="flowrule !=null and flowrule !=''">flowrule,</if>
+        <if test="iscustom !=null and iscustom !='0'">iscustom,</if>
+        <if test="isallcheck !=null and isallcheck !='0'">isallcheck,</if>
+        <if test="execution !=null and execution !=''">execution,</if>
+        <if test="compulsoryover !=null and compulsoryover !='0'">compulsoryover,</if>
+        iseditattr
+        )values(
+        <if test="id !=null and id !=''">#{id},</if>
+        <if test="name !=null and name !=''">#{name},</if>
+        <if test="remark !=null and remark !=''">#{remark},</if>
+        <if test="sort !=null and sort !='0'">#{sort},</if>
+        <if test="formid !=null and formid !=''">#{formid},</if>
+        <if test="flowrule !=null and flowrule !=''">#{flowrule},</if>
+        <if test="iscustom !=null and iscustom !='0'">#{iscustom},</if>
+        <if test="isallcheck !=null and isallcheck !='0'">#{isallcheck},</if>
+        <if test="execution !=null and execution !=''">#{execution},</if>
+        <if test="compulsoryover !=null and compulsoryover !='0'">#{compulsoryover},</if>
+        #{iseditattr}
+        )
+    </insert>
+    <update id="update" parameterType="String">
+        update sys_flow_formattr
+        <set>
+            <if test="id !=null and id !=0">id=#{id},</if>
+            <if test="name !=null and name !=''">name=#{name},</if>
+            <if test="remark !=null and remark !=''">remark=#{remark},</if>
+            <if test="optionlist !=null and optionlist !=''">optionlist=#{optionlist},</if>
+            <if test="typeid !=null and typeid !=''">typeid=#{typeid},</if>
+            <if test="checkrule !=null and checkrule !=''">checkrule=#{checkrule},</if>
+            <if test="alias !=null and alias !=''">alias=#{alias},</if>
+            <if test="length !=null and length !=''">length=#{length},</if>
+            <if test="checkjs !=null and checkjs !=''">checkjs=#{checkjs},</if>
+            <if test="types !=null and types !=''">types=#{types},</if>
+            create_time= #{create_time}
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteById" parameterType="String">
+        delete
+        from sys_flow_step
+        where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="queryById" parameterType="String" resultType="Long">
+        select MAX(t.sort)
+        from sys_flow_step t
+        where formid = #{formid}
+    </select>
+
+    <select id="queryAllByLimit" resultType="com.jeethink.project.dynamic.domain.SysFlowStep"></select>
+
+</mapper>
