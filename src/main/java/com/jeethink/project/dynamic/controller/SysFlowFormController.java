@@ -7,6 +7,9 @@ import com.jeethink.project.dynamic.domain.SysFlowForm;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 import com.jeethink.project.dynamic.service.SysFlowFormService;
 import com.jeethink.project.dynamic.service.SysFlowFormattrService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
 
@@ -28,6 +31,7 @@ import java.util.Map;
  * @author makejava
  * @since 2021-04-20 10:58:46
  */
+@Api("表单管理")
 @RestController
 @RequestMapping("/system/sysFlowForm")
 public class SysFlowFormController extends BaseController{
@@ -39,7 +43,7 @@ public class SysFlowFormController extends BaseController{
     @Resource
     private SysFlowFormattrService sysFlowFormattrService;
 
-
+    @ApiOperation("获取字段")
     @GetMapping("/selectattrs")
     public AjaxResult selectAttrs(SysFlowFormattr sysFlowFormattr,SysFlowForm sysFlowForm) {
         Map map1 = new HashMap();
@@ -60,12 +64,14 @@ public class SysFlowFormController extends BaseController{
         list.add(form);
         return AjaxResult.success(list);
     }
-
+    @ApiOperation("新增表单")
+    @ApiImplicitParam(name = "sysFlowForm", value = "新增表单", dataType = "SysFlowForm")
     @PostMapping("/add")
     public AjaxResult add(@RequestBody SysFlowForm sysFlowForm) {
         return toAjax(sysFlowFormService.insert(sysFlowForm));
     }
-
+    @ApiOperation("删除表单")
+    @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "String", paramType = "path")
     @DeleteMapping("/{id}")
     public AjaxResult remove(@PathVariable String[] id) {
         return toAjax(sysFlowFormService.deleteById(id));

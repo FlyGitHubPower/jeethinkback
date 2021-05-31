@@ -11,7 +11,7 @@ public class SysFlowForm implements Serializable {
      * 表单id
      */
     private String id;
-
+    private String zdlist;
     private String htmlfrom;
     /**
      * 事件id
@@ -93,6 +93,14 @@ public class SysFlowForm implements Serializable {
 
     private String externalurl;
     private String typ;
+
+    public String getZdlist() {
+        return zdlist;
+    }
+
+    public void setZdlist(String zdlist) {
+        this.zdlist = zdlist;
+    }
 
     public String getTyp() {
         return typ;

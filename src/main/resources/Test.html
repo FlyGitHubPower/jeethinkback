@@ -1,74 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<form id='ff' action='#' method='post'>
-    <table>
-        <tr class='drag-item'>
-            <td>请假日期:</td>
-            <td><input readonly='true' id='attra' class='easyui-datebox' type='data' name='qjrq'/></td>
-        </tr>
-        <tr class='drag-item'>
-            <td>请假理由:</td>
-            <td><input readonly='true' id='attrb' class='easyui-textbox' type='text' name='1111'/></td>
-        </tr>
-        <tr class='drag-item'>
-            <td>请假去向:</td>
-            <td><input readonly='true' id='attrc' class='easyui-textbox' type='text' name='111'/></td>
-        </tr>
-    </table>
-</form>
 
-
-
-<form id="ff" action="#" method="post">
-    <table>
-        <tbody>
-        <tr class="drag-item droppable" style="">
-            <td>请假理由:</td>
-            <td><input readonly="true" id="attrb" class="easyui-textbox textbox-f" type="text" textboxname="1111"
-                       style="display: none;"><span class="textbox textbox-readonly" style="width: 177px;">
-                <input
-                        id="_easyui_textbox_input1" type="text"
-                        class="textbox-text validatebox-text validatebox-readonly textbox-prompt" autocomplete="off"
-                        tabindex="" readonly="" placeholder=""
-                        style="margin: 0px; padding-top: 0px; padding-bottom: 0px; height: 28px; line-height: 28px; width: 175px;"><input
-                    type="hidden" class="textbox-value" name="1111" value=""></span></td>
-        </tr>
-        <tr class="drag-item droppable" style="">
-            <td>请假去向:</td>
-            <td><input readonly="true" id="attrc" class="easyui-textbox textbox-f" type="text" textboxname="111"
-                       style="display: none;"><span class="textbox textbox-readonly" style="width: 177px;">
-                <input
-                        id="_easyui_textbox_input2" type="text"
-                        class="textbox-text validatebox-text validatebox-readonly textbox-prompt" autocomplete="off"
-                        tabindex="" readonly="" placeholder=""
-                        style="margin: 0px; padding-top: 0px; padding-bottom: 0px; height: 28px; line-height: 28px; width: 175px;"><input
-                    type="hidden" class="textbox-value" name="111" value=""></span></td>
-        </tr>
-        <tr class="drag-item droppable" style="position: static; left: 0px; top: 2px;">
-            <td>请假日期:</td>
-            <td><input readonly="true" id="attra" class="easyui-datebox datebox-f combo-f textbox-f" type="data"
-                       textboxname="qjrq" style="display: none;" comboname="qjrq"><span
-                    class="textbox textbox-readonly combo datebox" style="width: 177px;"><span
-                    class="textbox-addon textbox-addon-right" style="right: 0px; top: 0px;"><a href="javascript:;"
-                                                                                               class="textbox-icon combo-arrow textbox-icon-disabled"
-                                                                                               icon-index="0"
-                                                                                               tabindex="-1"
-                                                                                               style="width: 26px; height: 28px;"></a></span>
-                <input
-                        id="_easyui_textbox_input3" type="data"
-                        class="textbox-text validatebox-text validatebox-readonly textbox-prompt" autocomplete="off"
-                        tabindex="" readonly="" placeholder=""
-                        style="margin: 0px 26px 0px 0px; padding-top: 0px; padding-bottom: 0px; height: 28px; line-height: 28px; width: 149px;"><input
-                        type="hidden" class="textbox-value" name="qjrq" value=""></span></td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+<h1>输入测试</h1>
+<form id='ff' action='#' method='post'><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>数字:</td><td class='inputcontent'><input name='attra' type='number' id='' class='input'></select></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>多行文本:</td><td class='inputcontent'><textarea  name='attrb' cols='40' rows='20'  id='' class='input'></textarea></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>单选:</td><td class='inputcontent'><p><input type='radio' value='4' name='attrc'/>4<input type='radio' value='3' name='attrc'/>3<input type='radio' value='2' name='attrc'/>2<input type='radio' value='1' name='attrc'/>1</p></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>多选:</td><td class='inputcontent'><p><input type='checkbox' value='4' name='attrd'/>4<input type='checkbox' value='3' name='attrd'/>3<input type='checkbox' value='2' name='attrd'/>2<input type='checkbox' value='1' name='attrd'/>1</p></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>下拉框:</td><td class='inputcontent'><select name='attre' id='' class='input'><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option></select></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>日期:</td><td class='inputcontent'><input   name='attrf' type='date'  id='' class='input'></input></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>按钮:</td><td class='inputcontent'><button   name='attrg' type='button'  id='' class='input'>提交</button></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>文本:</td><td class='inputcontent'><input   name='attrh' type='text'  id='' class='input'></input></td></tr></tbody></table></div><div><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>文件:</td><td class='inputcontent'><input   name='attri' input enctype='multipart/form-data' maxlength='100' type='file'  id='' class='input'></input></td></tr></tbody></table></div></table></form>
+=====================================================
+<h1>拖动测试</h1>
+<form id='ff' action='#' method='post'><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>数字:</td><td class='inputcontent'><input name='attra' type='number' id='' class='input'></select></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>多行文本:</td><td class='inputcontent'><textarea  name='attrb' cols='40' rows='20'  id='' class='input'></textarea></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>单选:</td><td class='inputcontent'><p><input type='radio' value='boy' name='sex'/>4<input type='radio' value='boy' name='sex'/>3<input type='radio' value='boy' name='sex'/>2<input type='radio' value='boy' name='sex'/>1</p></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>多选:</td><td class='inputcontent'><p><input type='checkbox' value='boy' name='sex'/>4<input type='checkbox' value='boy' name='sex'/>3<input type='checkbox' value='boy' name='sex'/>2<input type='checkbox' value='boy' name='sex'/>1</p></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>下拉框:</td><td class='inputcontent'><select name='attre' id='' class='input'><option value='4'>4</option><option value='3'>3</option><option value='2'>2</option><option value='1'>1</option></select></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>日期:</td><td class='inputcontent'><input   name='attrf' type='date'  id='' class='input'></input></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>按钮:</td><td class='inputcontent'><button   name='attrg' type='button'  id='' class='input'>提交</button></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>文本:</td><td class='inputcontent'><input   name='attrh' type='text'  id='' class='input'></input></td></tr></tbody></table></div><div class='easyui-draggable' data-option='onDrag:onDrag'><table class='inputtable'><tbody><tr><td style='vertical-align:middle' class='inputtitle'>文件:</td><td class='inputcontent'><input   name='attri' input enctype='multipart/form-data' maxlength='100' type='file'  id='' class='input'></input></td></tr></tbody></table></div></table></form>
 <script>$(function () {
     $('#box').form({
         url: '#', onSubmit: function () {

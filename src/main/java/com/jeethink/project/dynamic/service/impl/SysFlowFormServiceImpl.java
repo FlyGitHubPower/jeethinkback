@@ -9,7 +9,10 @@ import com.jeethink.project.dynamic.mapper.SysFlowFormattrMapper;
 import com.jeethink.project.dynamic.service.SysFlowFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.annotation.Resource;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -65,15 +68,14 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
         sysFlowForm.setId(formid[0]);
         List<SysFlowForm> forms = sysFlowFormMapper.queryAll(sysFlowForm);
         SysFlowForm s = forms.get(0);
-
-        if (s.getHtmlfrom()!=null) {
+        if (s.getHtmlfrom() != null) {
 
             if (formid.length != 1) {
 
-            String source = s.getHtmlfrom();
+                String source = s.getHtmlfrom();
 
-            String[] sourceArray = source.split("<script>");
-                boolean status = sourceArray[0].contains("class=\"drag-item droppable\"");
+                String[] sourceArray = source.split("<script>");
+                boolean status = sourceArray[0].contains("class=\"easyui-draggable\" data-option=\"onDrag:onDrag\"");
                 if (status) {
                     String[] sourceArray1 = sourceArray[1].split("</script>");
                     sb2.append(s.getName());
@@ -88,11 +90,10 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                     return list;
                 } else {
                     String source1 = s.getHtmlfrom();
-
                     String[] sourceArray2 = source1.split("<script>");
                     String[] sourceArray1 = sourceArray2[1].split("</script>");
                     sb2.append(s.getName());
-                    String sAString = sourceArray2[0].replace("<tr","<tr class='drag-item'").replace("data-options=\"required:true\"","readonly='true'");
+                    String sAString = sourceArray2[0].replace("<div", "<div class=\"easyui-draggable\" data-option=\"onDrag:onDrag\"");
                     sb.append(sAString);
 
                     sb1.append(sourceArray1[0]);
@@ -105,13 +106,13 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                     return list;
                 }
 
-            }else {
+            } else {
                 String source = s.getHtmlfrom();
 
                 String[] sourceArray = source.split("<script>");
                 String[] sourceArray1 = sourceArray[1].split("</script>");
                 sb2.append(s.getName());
-                String sAString = sourceArray[0].replace("class=\"drag-item droppable\"","").replace("readonly=\"true\"","data-options='required:true'");
+                String sAString = sourceArray[0].replace("class=\"easyui-draggable\" data-option=\"onDrag:onDrag\"", "");
                 sb.append(sAString);
 
                 sb1.append(sourceArray1[0]);
@@ -124,7 +125,6 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                 return list;
             }
         }
-
 
         sb2.append(s.getName());
         List<String> list3 = new ArrayList();
@@ -154,8 +154,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
         list3.add(s.getAttrx());
         list3.add(s.getAttry());
         list3.add(s.getAttrz());
-        sb = sb.append("<form id='ff' action='#' method='post'>" +
-                "<table>");
+        sb = sb.append("<form id='ff' action='#' method='post'>");
         for (int i = 0; i < 26; i++) {
             Boolean outFlag = true;
             if (list3.get(i) != null) {
@@ -166,40 +165,93 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                 List<SysFlowFormattr> attr = sysFlowFormattrMapper.queryAll(sysFlowFormattr);
                 for (SysFlowFormattr sf : attr
                 ) {
-                    String classString = "easyui-textbox";
+                    String classString = "input";
+                    String dataOptions = "";
+//                  String readonly = "";
+                    String inputType = "";
+                    String innerContent = "";
                     if (sf.getTypes().equals("文本")) {
                         sf.setTypes("text");
-                        classString = "easyui-textbox";
+                        inputType = "<input   name='" + idString + "' type='" + sf.getTypes() + "'  id='' class='" + classString + "'>" +
+                                "</input>";
                     } else if (sf.getTypes().equals("下拉框")) {
-                        sf.setTypes("select");
-                        classString = "easyui-combotreegrid";
+                        sf.getOptionlist();
+                        String str = sf.getOptionlist();
+                        String[] arr = str.split(",");
+                        System.out.println(Arrays.toString(arr) + "下拉框");
+
+                        for (int j = 0; j < arr.length; j++) {
+                            innerContent = "<option value='" + arr[j] + "'>" + arr[j] + "</option>" + innerContent;
+                        }
+                        inputType = "<select name='" + idString + "' id='' class='" + classString + "'>" +
+                                innerContent +
+                                "</select>";
                     } else if (sf.getTypes().equals("按钮")) {
                         sf.setTypes("button");
-                        classString = "easyui-textbox";
+                        inputType = "<button   name='" + idString + "' type='" + sf.getTypes() + "'  id='' class='" + classString + "'>" +
+                                "提交</button>";
                     } else if (sf.getTypes().equals("日期")) {
-                        sf.setTypes("data");
-                        classString = "easyui-datebox";
+                        sf.setTypes("date");
+                        inputType = "<input   name='" + idString + "' type='" + sf.getTypes() + "'  id='' class='" + classString + "'>" +
+                                "</input>";
                     } else if (sf.getTypes().equals("文件")) {
-                        sf.setTypes("data");
-                        classString = "easyui-filebox";
+                        sf.setTypes("file");
+                        inputType = "<input   name='" + idString + "' input enctype='multipart/form-data' maxlength='100' type='" + sf.getTypes() + "'  id='' class='" + classString + "'>" +
+                                "</input>";
+                    } else if (sf.getTypes().equals("数字")) {
+                        sf.setTypes("number");
+                        inputType = "<input name='" + idString + "' type='" + sf.getTypes() + "' id='' class='" + classString + "'>" +
+                                "</select>";
+                    } else if (sf.getTypes().equals("多行文本")) {
+                        inputType = "<textarea  name='" + idString + "' cols='40' rows='20'  id='' class='" + classString + "'>" +
+                                "</textarea>";
+                    } else if (sf.getTypes().equals("单选")) {
+                        sf.setTypes("radio");
+                        String str = sf.getOptionlist();
+                        String[] arr = str.split(",");
+                        System.out.println(Arrays.toString(arr) + "单选");
+
+                        for (int j = 0; j < arr.length; j++) {
+                            innerContent = "<input type='radio' value='"+arr[j]+"' name='" + idString + "'/>" + arr[j] + innerContent;
+                        }
+                        inputType = "<p>" +
+                                innerContent +
+                                "</p>";
+                    } else if (sf.getTypes().equals("多选")) {
+                        sf.setTypes("checkbox");
+                        String str = sf.getOptionlist();
+                        String[] arr = str.split(",");
+                        System.out.println(Arrays.toString(arr) + "多选");
+                        for (int j = 0; j < arr.length; j++) {
+                            innerContent = "<input type='checkbox' value='"+arr[j]+"' name='" + idString + "'/>" + arr[j] + innerContent;
+                        }
+                        inputType = "<p>" +
+                                innerContent +
+                                "</p>";
                     }
-                    String dataOptions = "";
-                    String readonly="";
+
                     if (formid.length != 1) {
-                        sb = sb.append("<tr class='drag-item'>");
-                        readonly="readonly='true'";
+                        sb = sb.append("<div class=\"easyui-draggable\" data-option=\"onDrag:onDrag\">");
                     } else {
-                        sb = sb.append("<tr>");
-                        dataOptions = "data-options='required:true'";
+                        sb = sb.append("<div>");
                     }
 
 
                     sb = sb.append(
-                            "<td>" + sf.getAlias() + ":</td>" +
-                                    "    <td><input  " + readonly + " name='" + idString + "' class='" + classString + "' type='" + sf.getTypes() +  "'" +
-                                    dataOptions +
-                                    "/></td>" +
-                                    "</tr>");
+
+
+                            "<table class='inputtable'>" +
+                                    "<tbody>" +
+                                    "<tr>" +
+                                    "<td style='vertical-align:middle' class='inputtitle'>" + sf.getAlias() + ":</td>" +
+                                    "<td class='inputcontent'>" +
+                                    inputType +
+                                    "</td>" +
+                                    "</tr>" +
+                                    "</tbody>" +
+                                    "</table>" +
+                                    "</div>"
+                    );
                 }
             }
             if (outFlag) {

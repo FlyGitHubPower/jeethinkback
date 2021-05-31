@@ -36,6 +36,7 @@
         <result property="attrx" column="attrx" jdbcType="VARCHAR"/>
         <result property="attry" column="attry" jdbcType="VARCHAR"/>
         <result property="attrz" column="attrz" jdbcType="VARCHAR"/>
+        <result property="zdlist" column="zdlist" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="usingdep" column="usingdep" jdbcType="VARCHAR"/>
         <result property="state" column="state" jdbcType="INTEGER"/>
@@ -99,6 +100,7 @@
         <if test="attrx !=null and attrx !=''">attrx,</if>
         <if test="attry !=null and attry !=''">attry,</if>
         <if test="attrz !=null and attrz !=''">attrz,</if>
+        <if test="zdlist !=null and zdlist !=''">zdlist,</if>
         <if test="name !=null and name !=''">name,</if>
         <if test="usingdep !=null and usingdep !=''">usingdep,</if>
         <if test="state !=null">state,</if>
@@ -136,6 +138,7 @@
         <if test="attrx !=null and attrx !=''">#{attrx},</if>
         <if test="attry !=null and attry !=''">#{attry},</if>
         <if test="attrz !=null and attrz !=''">#{attrz},</if>
+        <if test="zdlist !=null and zdlist !=''">#{zdlist},</if>
         <if test="name !=null and name !=''">#{name},</if>
         <if test="usingdep !=null and usingdep !=''">#{usingdep},</if>
         <if test="state !=null">#{state},</if>
@@ -177,6 +180,7 @@
             <if test="attrx !=null and attrx !=''">attrx=#{attrx},</if>
             <if test="attry !=null and attry !=''">attry=#{attry},</if>
             <if test="attrz !=null and attrz !=''">attrz=#{attrz},</if>
+            <if test="zdlist !=null and zdlist !=''">zdlist=#{zdlist},</if>
             <if test="name !=null and name !=''">name=#{name},</if>
             <if test="usingdep !=null and usingdep !=''">usingdep=#{usingdep},</if>
             <if test="state !=null">state=#{state},</if>
@@ -221,7 +225,7 @@
         t.attrt,t.attru,t.attrv,
         t.attrw,t.attrx,t.attry,
         t.attrz,t.name,t.usingdep,
-        t.state,t.isexternal,t.externalurl,f.name as typ
+        t.state,t.zdlist,t.isexternal,t.externalurl,f.name as typ
         from sys_flow_form t,sys_flow_type f
         <where>
             AND t.typeid=f.id
