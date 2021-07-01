@@ -42,6 +42,7 @@
         <result property="state" column="state" jdbcType="INTEGER"/>
         <result property="isexternal" column="isexternal" jdbcType="INTEGER"/>
         <result property="externalurl" column="externalurl" jdbcType="VARCHAR"/>
+        <result property="submiter" column="submiter" jdbcType="VARCHAR"/>
 
     </resultMap>
     <resultMap id="BaseResultMap1" type="FormType">
@@ -54,6 +55,35 @@
 
     </resultMap>
 
+    <resultMap id="content" type="SysFlowForm">
+        <id property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="attra" column="attra" jdbcType="VARCHAR"/>
+        <result property="attrb" column="attrb" jdbcType="VARCHAR"/>
+        <result property="attrc" column="attrc" jdbcType="VARCHAR"/>
+        <result property="attrd" column="attrd" jdbcType="VARCHAR"/>
+        <result property="attre" column="attre" jdbcType="VARCHAR"/>
+        <result property="attrf" column="attrf" jdbcType="VARCHAR"/>
+        <result property="attrg" column="attrg" jdbcType="VARCHAR"/>
+        <result property="attrh" column="attrh" jdbcType="VARCHAR"/>
+        <result property="attri" column="attri" jdbcType="VARCHAR"/>
+        <result property="attrj" column="attrj" jdbcType="VARCHAR"/>
+        <result property="attrk" column="attrk" jdbcType="VARCHAR"/>
+        <result property="attrl" column="attrl" jdbcType="VARCHAR"/>
+        <result property="attrm" column="attrm" jdbcType="VARCHAR"/>
+        <result property="attrn" column="attrn" jdbcType="VARCHAR"/>
+        <result property="attro" column="attro" jdbcType="VARCHAR"/>
+        <result property="attrp" column="attrp" jdbcType="VARCHAR"/>
+        <result property="attrq" column="attrq" jdbcType="VARCHAR"/>
+        <result property="attrr" column="attrr" jdbcType="VARCHAR"/>
+        <result property="attrs" column="attrs" jdbcType="VARCHAR"/>
+        <result property="attrt" column="attrt" jdbcType="VARCHAR"/>
+        <result property="attru" column="attru" jdbcType="VARCHAR"/>
+        <result property="attrv" column="attrv" jdbcType="VARCHAR"/>
+        <result property="attrw" column="attrw" jdbcType="VARCHAR"/>
+        <result property="attrx" column="attrx" jdbcType="VARCHAR"/>
+        <result property="attry" column="attry" jdbcType="VARCHAR"/>
+        <result property="attrz" column="attrz" jdbcType="VARCHAR"/>
+    </resultMap>
     <sql id="Base_Column_List">
         id,htmlfrom,typeid,
         create_time,remark,attra,
@@ -66,7 +96,7 @@
         attrt,attru,attrv,
         attrw,attrx,attry,
         attrz,name,usingdep,
-        state,isexternal,externalurl
+        state,isexternal,externalurl,submiter
     </sql>
     <insert id="insert" parameterType="SysFlowForm">
         insert into sys_flow_form(
@@ -106,6 +136,7 @@
         <if test="state !=null">state,</if>
         <if test="isexternal !=null">isexternal,</if>
         <if test="externalurl !=null and externalurl !=''">externalurl,</if>
+        <if test="submiter !=null and submiter !=''">submiter,</if>
         create_time
         )values(
         <if test="id !=null and id !=''">#{id},</if>
@@ -144,6 +175,7 @@
         <if test="state !=null">#{state},</if>
         <if test="isexternal !=null">#{isexternal},</if>
         <if test="externalurl !=null and externalurl !=''">#{externalurl},</if>
+        <if test="submiter !=null and submiter !=''">#{submiter},</if>
         #{createTime}
         )
     </insert>
@@ -151,41 +183,42 @@
         update sys_flow_form
         <set>
             <if test="id !=null and id !=''">id=#{id},</if>
-            <if test="htmlfrom !=null and htmlfrom !=''">htmlfrom=#{htmlfrom},</if>
+            <if test="htmlfrom !=''">htmlfrom=#{htmlfrom},</if>
             <if test="typeid !=null and typeid !=''">typeid=#{typeid},</if>
             <if test="remark !=null and remark !=''">remark=#{remark},</if>
-            <if test="attra !=null and attra !=''">attra=#{attra},</if>
-            <if test="attrb !=null and attrb !=''">attrb=#{attrb},</if>
-            <if test="attrc !=null and attrc !=''">attrc=#{attrc},</if>
-            <if test="attrd !=null and attrd !=''">attrd=#{attrd},</if>
-            <if test="attre !=null and attre !=''">attre=#{attre},</if>
-            <if test="attrf !=null and attrf !=''">attrf=#{attrf},</if>
-            <if test="attrg !=null and attrg !=''">attrg=#{attrg},</if>
-            <if test="attrh !=null and attrh !=''">attrh=#{attrh},</if>
-            <if test="attri !=null and attri !=''">attri=#{attri},</if>
-            <if test="attrj !=null and attrj !=''">attrj=#{attrj},</if>
-            <if test="attrk !=null and attrk !=''">attrk=#{attrk},</if>
-            <if test="attrl !=null and attrl !=''">attrl=#{attrl},</if>
-            <if test="attrm !=null and attrm !=''">attrm=#{attrm},</if>
-            <if test="attrn !=null and attrn !=''">attrn=#{attrn},</if>
-            <if test="attro !=null and attro !=''">attro=#{attro},</if>
-            <if test="attrp !=null and attrp !=''">attrp=#{attrp},</if>
-            <if test="attrq !=null and attrq !=''">attrq=#{attrq},</if>
-            <if test="attrr !=null and attrr !=''">attrr=#{attrr},</if>
-            <if test="attrs !=null and attrs !=''">attrs=#{attrs},</if>
-            <if test="attrt !=null and attrt !=''">attrt=#{attrt},</if>
-            <if test="attru !=null and attru !=''">attru=#{attru},</if>
-            <if test="attrv !=null and attrv !=''">attrv=#{attrv},</if>
-            <if test="attrw !=null and attrw !=''">attrw=#{attrw},</if>
-            <if test="attrx !=null and attrx !=''">attrx=#{attrx},</if>
-            <if test="attry !=null and attry !=''">attry=#{attry},</if>
-            <if test="attrz !=null and attrz !=''">attrz=#{attrz},</if>
+            <if test="attra !=''">attra=#{attra},</if>
+            <if test="attrb !=''">attrb=#{attrb},</if>
+            <if test="attrc !=''">attrc=#{attrc},</if>
+            <if test="attrd !=''">attrd=#{attrd},</if>
+            <if test="attre !=''">attre=#{attre},</if>
+            <if test="attrf !=''">attrf=#{attrf},</if>
+            <if test="attrg !=''">attrg=#{attrg},</if>
+            <if test="attrh !=''">attrh=#{attrh},</if>
+            <if test="attri !=''">attri=#{attri},</if>
+            <if test="attrj !=''">attrj=#{attrj},</if>
+            <if test="attrk !=''">attrk=#{attrk},</if>
+            <if test="attrl !=''">attrl=#{attrl},</if>
+            <if test="attrm !=''">attrm=#{attrm},</if>
+            <if test="attrn !=''">attrn=#{attrn},</if>
+            <if test="attro !=''">attro=#{attro},</if>
+            <if test="attrp !=''">attrp=#{attrp},</if>
+            <if test="attrq !=''">attrq=#{attrq},</if>
+            <if test="attrr !=''">attrr=#{attrr},</if>
+            <if test="attrs !=''">attrs=#{attrs},</if>
+            <if test="attrt !=''">attrt=#{attrt},</if>
+            <if test="attru !=''">attru=#{attru},</if>
+            <if test="attrv !=''">attrv=#{attrv},</if>
+            <if test="attrw !=''">attrw=#{attrw},</if>
+            <if test="attrx !=''">attrx=#{attrx},</if>
+            <if test="attry !=''">attry=#{attry},</if>
+            <if test="attrz !=''">attrz=#{attrz},</if>
             <if test="zdlist !=null and zdlist !=''">zdlist=#{zdlist},</if>
             <if test="name !=null and name !=''">name=#{name},</if>
             <if test="usingdep !=null and usingdep !=''">usingdep=#{usingdep},</if>
             <if test="state !=null">state=#{state},</if>
             <if test="isexternal !=null">isexternal=#{isexternal},</if>
             <if test="externalurl !=null and externalurl !=''">externalurl=#{externalurl},</if>
+            <if test="submiter !=null and submiter !=''">submiter=#{submiter},</if>
             create_time=#{createTime}
         </set>
         where id=#{id}
@@ -199,7 +232,7 @@
         </foreach>
     </delete>
     <select id="queryById" parameterType="FormType" resultMap="BaseResultMap1">
-        select a.name as typename,a.remark,t.name as formname,a.id as typeid,t.id as formid from sys_flow_type a
+        select a.name as typename,a.remark,t.name as formname,t.zdlist as zdlist,a.id as typeid,t.id as formid from sys_flow_type a
         INNER JOIN sys_flow_form t on t.typeid=a.id
         <where>
             <if test="typename!=null and typename!=''">
@@ -207,6 +240,9 @@
             </if>
             <if test="remark!=null and remark!=''">
                 and  a.remark=#{remark}
+            </if>
+            <if test="formid!=null and formid!=''">
+                and  t.id=#{formid}
             </if>
         </where>
     </select>
@@ -225,7 +261,7 @@
         t.attrt,t.attru,t.attrv,
         t.attrw,t.attrx,t.attry,
         t.attrz,t.name,t.usingdep,
-        t.state,t.zdlist,t.isexternal,t.externalurl,f.name as typ
+        t.state,t.zdlist,t.isexternal,t.externalurl,t.submiter,f.name as typ
         from sys_flow_form t,sys_flow_type f
         <where>
             AND t.typeid=f.id
@@ -237,6 +273,23 @@
             </if>
             <if test="typeid != null and typeid != 0">
                 AND t.typeid = #{typeid}
+            </if>
+        </where>
+    </select>
+    <select id="queryContent"  parameterType="SysFlowForm" resultMap="content">
+        select t.attra,
+        t.attrb,t.attrc,t.attrd,
+        t.attre,t.attrf,t.attrg,
+        t.attrh,t.attri,t.attrj,
+        t.attrk,t.attrl,t.attrm,
+        t.attrn,t.attro,t.attrp,
+        t.attrq,t.attrr,t.attrs,
+        t.attrt,t.attru,t.attrv,
+        t.attrw,t.attrx,t.attry,
+        t.attrz from sys_flow_form t
+        <where>
+            <if test="id != null">
+                AND t.id = #{id}
             </if>
         </where>
     </select>

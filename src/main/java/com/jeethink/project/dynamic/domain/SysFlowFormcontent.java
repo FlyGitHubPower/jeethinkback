@@ -212,6 +212,15 @@ public class SysFlowFormcontent implements Serializable {
      *
      */
     private String custommember;
+    private String formlist;
+
+    public String getFormlist() {
+        return formlist;
+    }
+
+    public void setFormlist(String formlist) {
+        this.formlist = formlist;
+    }
 
     private static final long serialVersionUID = 1L;
 

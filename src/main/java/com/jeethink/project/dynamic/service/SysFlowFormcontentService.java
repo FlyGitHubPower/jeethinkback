@@ -1,6 +1,7 @@
 package com.jeethink.project.dynamic.service;
 
 
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 import com.jeethink.project.dynamic.domain.SysFlowFormcontent;
 
@@ -21,7 +22,8 @@ public interface SysFlowFormcontentService {
      * @return 实例对象
      */
     SysFlowFormcontent queryById(String id);
-    List<SysFlowFormcontent> queryAll(SysFlowFormcontent sysFlowFormcontent);
+    int queryTotal();
+    TableDataInfo queryAll(SysFlowFormcontent sysFlowFormcontent);
     /**
      * 查询多条数据
      *
@@ -45,7 +47,7 @@ public interface SysFlowFormcontentService {
      * @param sysFlowFormcontent 实例对象
      * @return 实例对象
      */
-    SysFlowFormcontent update(SysFlowFormcontent sysFlowFormcontent);
+    int update(SysFlowFormcontent sysFlowFormcontent);
 
     /**
      * 通过主键删除数据
@@ -53,6 +55,6 @@ public interface SysFlowFormcontentService {
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(String id);
+    int deleteById(String[] id);
 
 }

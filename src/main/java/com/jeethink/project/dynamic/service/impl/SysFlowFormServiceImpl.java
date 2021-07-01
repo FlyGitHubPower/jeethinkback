@@ -1,5 +1,8 @@
 package com.jeethink.project.dynamic.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.jeethink.common.utils.IdWorker;
 import com.jeethink.project.dynamic.domain.FormType;
 import com.jeethink.project.dynamic.domain.SysFlowForm;
@@ -30,6 +33,50 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
     @Autowired
     private IdWorker idWorker;
 
+    @Override
+    public List<Object> queryByFormId(FormType formType) {
+        List<String> strings = new ArrayList<>();
+        List<Object> list = new ArrayList<>();
+        List<FormType> formTypes = sysFlowFormMapper.queryById(formType);
+        for (FormType type : formTypes) {
+            if (strings.contains(type.getTypeid())) {
+                continue;
+            }
+            strings.add(type.getTypeid());
+            Map<String, Object> map1 = new HashMap<>();
+            map1.put("typename", type.getTypename());
+            map1.put("label", type.getTypename());
+            map1.put("remark", type.getRemark());
+            FormType formType1 = new FormType();
+            formType1.setTypename(type.getTypename());
+            formType1.setRemark(type.getRemark());
+            formType1.setFormid(formType.getFormid());
+            formType1.setRemark(type.getRemark());
+            List<FormType> formTypess = sysFlowFormMapper.queryById(formType1);
+            List list1 = new ArrayList();
+            for (FormType type1 : formTypess) {
+                Map map=new HashMap();
+                if (type1.getZdlist() != null) {
+
+                    String zdlistStrings = type1.getZdlist();
+//                zdlistStrings = zdlistStrings.replace("\n", "").replace(" ", "");
+                    JSONArray zdlist = (JSONArray) JSON.parse(zdlistStrings);
+
+                    map.put("typeid",type1.getTypeid());
+                    map.put("formid",type1.getFormid());
+                    map.put("typename",type1.getTypename());
+                    map.put("formname",type1.getFormname());
+                    map.put("label",type1.getFormname());
+                    map.put("zdlist",zdlist);
+                    list1.add(map);
+                }
+//            map1.put("list", list1);}
+                map1.put("children", list1);}
+            list.add(map1);
+
+        }
+        return list;
+    }
 
     @Override
     public List<Object> queryById(FormType formType) {
@@ -43,17 +90,40 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
             strings.add(type.getTypeid());
             Map<String, Object> map1 = new HashMap<>();
             map1.put("typename", type.getTypename());
+            map1.put("label", type.getTypename());
             map1.put("remark", type.getRemark());
             FormType formType1 = new FormType();
             formType1.setTypename(type.getTypename());
             formType1.setRemark(type.getRemark());
             List<FormType> formTypess = sysFlowFormMapper.queryById(formType1);
+            List list1 = new ArrayList();
+            for (FormType type1 : formTypess) {
+                Map map=new HashMap();
+            if (type1.getZdlist() != null) {
 
-            map1.put("list", formTypess);
+                String zdlistStrings = type1.getZdlist();
+//                zdlistStrings = zdlistStrings.replace("\n", "").replace(" ", "");
+                JSONArray zdlist = (JSONArray) JSON.parse(zdlistStrings);
+
+                map.put("typeid",type1.getTypeid());
+                map.put("formid",type1.getFormid());
+                map.put("typename",type1.getTypename());
+                map.put("formname",type1.getFormname());
+                map.put("label",type1.getFormname());
+                map.put("zdlist",zdlist);
+                list1.add(map);
+            }
+//            map1.put("list", list1);}
+            map1.put("children", list1);}
             list.add(map1);
 
         }
         return list;
+    }
+
+    @Override
+    public List queryContent(SysFlowForm sysFlowForm) {
+        return sysFlowFormMapper.queryContent(sysFlowForm);
     }
 
 

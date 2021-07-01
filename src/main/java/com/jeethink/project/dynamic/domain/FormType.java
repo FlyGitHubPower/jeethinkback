@@ -5,7 +5,16 @@ public class FormType {
     private String formid;
     private String typename;
     private String formname;
+    private String zdlist;
     private String remark;
+
+    public String getZdlist() {
+        return zdlist;
+    }
+
+    public void setZdlist(String zdlist) {
+        this.zdlist = zdlist;
+    }
 
     public String getTypeid() {
         return typeid;
@@ -55,6 +64,7 @@ public class FormType {
                 ", typename='" + typename + '\'' +
                 ", formname='" + formname + '\'' +
                 ", remark='" + remark + '\'' +
+                ", zdlist='" + zdlist + '\'' +
                 '}';
     }
 }

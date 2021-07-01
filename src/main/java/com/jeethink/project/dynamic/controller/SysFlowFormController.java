@@ -2,6 +2,7 @@ package com.jeethink.project.dynamic.controller;
 
 import com.jeethink.framework.web.controller.BaseController;
 import com.jeethink.framework.web.domain.AjaxResult;
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.FormType;
 import com.jeethink.project.dynamic.domain.SysFlowForm;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
@@ -31,6 +32,7 @@ import java.util.Map;
  * @author makejava
  * @since 2021-04-20 10:58:46
  */
+@SuppressWarnings("AlibabaRemoveCommentedCode")
 @Api("表单管理")
 @RestController
 @RequestMapping("/system/sysFlowForm")
@@ -46,8 +48,6 @@ public class SysFlowFormController extends BaseController{
     @ApiOperation("获取字段")
     @GetMapping("/selectattrs")
     public AjaxResult selectAttrs(SysFlowFormattr sysFlowFormattr,SysFlowForm sysFlowForm) {
-        Map map1 = new HashMap();
-        Map map2 = new HashMap();
         List list = new ArrayList();
         List<SysFlowFormattr> Attr = sysFlowFormattrService.queryAll(sysFlowFormattr);
         List<SysFlowForm> form= sysFlowFormService.queryAll(sysFlowForm);
@@ -60,7 +60,6 @@ public class SysFlowFormController extends BaseController{
             a.getId();
         }
         }
-//        list.add(Attr);
         list.add(form);
         return AjaxResult.success(list);
     }
@@ -82,7 +81,19 @@ public class SysFlowFormController extends BaseController{
         List flowForms=sysFlowFormService.queryById(formType);
         return AjaxResult.success(flowForms);
     }
-
+    @GetMapping("/selectformVue")
+    public AjaxResult selectformVue(FormType formType, String token) {
+        if ("1".equals(token)) {
+            if (formType.getFormid() == null) {
+                return AjaxResult.error("请提供Formid以供查询。");
+            }
+        } else {
+            return AjaxResult.error("抱歉，Token 错误，您没有权限填写此表。");
+        }
+        List flowForms=sysFlowFormService.queryByFormId(formType);
+        if (flowForms.size()==0){return AjaxResult.error("抱歉，您提供的Formid查询内容为空，请检查是否错误。");}
+        return AjaxResult.success(flowForms);
+    }
     @GetMapping("/selecthtml/{formid}")
 
     public AjaxResult selectHtml(SysFlowForm sysFlowForm,SysFlowFormattr sysFlowFormattr,@PathVariable(value = "formid") String[] formid) {
@@ -91,9 +102,10 @@ public class SysFlowFormController extends BaseController{
     }
 
     @GetMapping("/selectAll")
-    public AjaxResult selectAll(SysFlowForm sysFlowForm) {
+    public TableDataInfo selectAll(SysFlowForm sysFlowForm) {
+        startPage();
         List<SysFlowForm> flowmAttr = sysFlowFormService.queryAll(sysFlowForm);
-        return AjaxResult.success(flowmAttr);
+        return getDataTable(flowmAttr);
     }
 
 

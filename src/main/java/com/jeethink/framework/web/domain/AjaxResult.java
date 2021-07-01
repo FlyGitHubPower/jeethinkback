@@ -19,6 +19,7 @@ public class AjaxResult extends HashMap<String, Object>
 
     /** 返回内容 */
     public static final String MSG_TAG = "msg";
+    public static final String TOTAL_TAG = "total";
 
     /** 数据对象 */
     public static final String DATA_TAG = "data";
@@ -58,7 +59,15 @@ public class AjaxResult extends HashMap<String, Object>
             super.put(DATA_TAG, data);
         }
     }
-
+    public AjaxResult(int code, Object data, String total,String others)
+    {
+        super.put(CODE_TAG, code);
+        super.put(TOTAL_TAG, total);
+        if (StringUtils.isNotNull(data))
+        {
+            super.put(DATA_TAG, data);
+        }
+    }
     /**
      * 返回成功消息
      * 
@@ -101,7 +110,10 @@ public class AjaxResult extends HashMap<String, Object>
     {
         return new AjaxResult(HttpStatus.SUCCESS, msg, data);
     }
-
+    public static AjaxResult success(Object data,String total,String others)
+    {
+        return new AjaxResult(HttpStatus.SUCCESS, data, total,null);
+    }
     /**
      * 返回错误消息
      * 

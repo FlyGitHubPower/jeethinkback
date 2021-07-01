@@ -4,6 +4,7 @@ package com.jeethink.project.dynamic.controller;
 import com.jeethink.framework.web.controller.BaseController;
 import com.jeethink.framework.web.domain.AjaxResult;
 import com.jeethink.framework.web.domain.server.Sys;
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowStep;
 import com.jeethink.project.dynamic.service.SysFlowStepService;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,9 @@ public class SysFlowStepController extends BaseController {
 
 
     @GetMapping("/selectAll")
-    public AjaxResult selectAll(SysFlowStep sysFlowStep) {
-        return AjaxResult.success(sysFlowStepService.queryAll(sysFlowStep));
+    public TableDataInfo selectAll(SysFlowStep sysFlowStep) {
+        startPage();
+        return getDataTable(sysFlowStepService.queryAll(sysFlowStep));
     }
 
     @PostMapping("/add")

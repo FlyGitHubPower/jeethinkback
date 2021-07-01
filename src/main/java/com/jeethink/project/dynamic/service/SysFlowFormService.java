@@ -17,7 +17,8 @@ public interface SysFlowFormService {
 
 
     List queryById(FormType formType);
-
+    List queryByFormId(FormType formType);
+    List queryContent(SysFlowForm sysFlowForm);
 
     List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr,String[] formid);
 

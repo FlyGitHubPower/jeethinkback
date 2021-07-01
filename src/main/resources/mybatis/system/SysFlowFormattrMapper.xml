@@ -16,6 +16,7 @@
         <result property="length" column="length"/>
         <result property="checkjs" column="checkjs"/>
         <result property="optionlist" column="optionlist"/>
+        <result property="adAttribute" column="adAttribute"/>
     </resultMap>
 
 
@@ -30,6 +31,7 @@
                t.alias,
                t.length,
                t.checkjs,
+               t.adAttribute,
                t.optionlist
         from sys_flow_formattr t
     </sql>
@@ -47,7 +49,7 @@
     <!--    </select>-->
     <select id="queryAll" parameterType="SysFlowFormattr" resultMap="SysFlowFormattrResult">
         select t.id, t.name, t.remark, t.create_time, t.typeid, t.types, t.checkrule, t.alias, t.length, t.checkjs,
-        t.optionlist,f.name as typ
+        t.optionlist,t.adAttribute,f.name as typ
         from sys_flow_formattr t,sys_flow_type f
         <where>
             AND t.typeid=f.id
@@ -69,6 +71,7 @@
         <if test="name !=null and name !=''">name,</if>
         <if test="remark !=null and remark !=''">remark,</if>
         <if test="optionlist !=null and optionlist !=''">optionlist,</if>
+        <if test="adAttribute !=null and adAttribute !=''">adAttribute,</if>
         <if test="typeid !=null and typeid !=''">typeid,</if>
         <if test="types !=null and types !=''">types,</if>
         <if test="checkrule !=null and checkrule !=''">checkrule,</if>
@@ -81,6 +84,7 @@
         <if test="name !=null and name !=''">#{name},</if>
         <if test="remark !=null and remark !=''">#{remark},</if>
         <if test="optionlist !=null and optionlist !=''">#{optionlist},</if>
+        <if test="adAttribute !=null and adAttribute !=''">#{adAttribute},</if>
         <if test="typeid !=null and typeid !=''">#{typeid},</if>
         <if test="types !=null and types !=''">#{types},</if>
         <if test="checkrule !=null and checkrule !=''">#{checkrule},</if>
@@ -97,6 +101,7 @@
             <if test="name !=null and name !=''">name=#{name},</if>
             <if test="remark !=null and remark !=''">remark=#{remark},</if>
             <if test="optionlist !=null and optionlist !=''">optionlist=#{optionlist},</if>
+            <if test="adAttribute !=null and adAttribute !=''">adAttribute=#{adAttribute},</if>
             <if test="typeid !=null and typeid !=''">typeid=#{typeid},</if>
             <if test="checkrule !=null and checkrule !=''">checkrule=#{checkrule},</if>
             <if test="alias !=null and alias !=''">alias=#{alias},</if>

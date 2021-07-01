@@ -39,6 +39,7 @@
         <result property="attry" column="attry" jdbcType="VARCHAR"/>
         <result property="attrz" column="attrz" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="formlist" column="formlist" jdbcType="VARCHAR"/>
         <result property="formlevel" column="formlevel" jdbcType="VARCHAR"/>
         <result property="isdelete" column="isdelete" jdbcType="INTEGER"/>
         <result property="timeout" column="timeout" jdbcType="TIMESTAMP"/>
@@ -60,7 +61,7 @@
         attrr,attrs,attrt,
         attru,attrv,attrw,
         attrx,attry,attrz,
-        name,formlevel,isdelete,
+        name,formlist,formlevel,isdelete,
         timeout,userid,projectid,
         custommember
     </sql>
@@ -73,37 +74,21 @@
         <if test="updateBy !=null and updateBy !=''">update_by,</if>
         <if test="remark !=null and remark !=''">remark,</if>
         <if test="name !=null and name !=''">name,</if>
+        <if test="formlist !=null and formlist !=''">formlist,</if>
         <if test="formlevel !=null and formlevel !=''">formlevel,</if>
         <if test="isdelete !=null and isdelete !=''">isdelete,</if>
         <if test="userid !=null and userid !=''">userid,</if>
         <if test="projectid !=null and projectid !=''">projectid,</if>
         <if test="custommember !=null and custommember !=''">custommember,</if>
-        <if test="attra !=null and attra !=''">attra,</if>
-        <if test="attrb !=null and attrb !=''">attrb,</if>
-        <if test="attrc !=null and attrc !=''">attrc,</if>
-        <if test="attrd !=null and attrd !=''">attrd,</if>
-        <if test="attre !=null and attre !=''">attre,</if>
-        <if test="attrf !=null and attrf !=''">attrf,</if>
-        <if test="attrg !=null and attrg !=''">attrg,</if>
-        <if test="attrh !=null and attrh !=''">attrh,</if>
-        <if test="attri !=null and attri !=''">attri,</if>
-        <if test="attrj !=null and attrj !=''">attrj,</if>
-        <if test="attrk !=null and attrk !=''">attrk,</if>
-        <if test="attrl !=null and attrl !=''">attrl,</if>
-        <if test="attrm !=null and attrm !=''">attrm,</if>
-        <if test="attrn !=null and attrn !=''">attrn,</if>
-        <if test="attro !=null and attro !=''">attro,</if>
-        <if test="attrp !=null and attrp !=''">attrp,</if>
-        <if test="attrq !=null and attrq !=''">attrq,</if>
-        <if test="attrr  !=null and attrr !=''">attrr,</if>
-        <if test="attrs !=null and attrs !=''">attrs,</if>
-        <if test="attrt !=null and attrt !=''">attrt,</if>
-        <if test="attru !=null and attru !=''">attru,</if>
-        <if test="attrv !=null and attrv !=''">attrv,</if>
-        <if test="attrw !=null and attrw !=''">attrw,</if>
-        <if test="attrx !=null and attrx !=''">attrx,</if>
-        <if test="attry !=null and attry !=''">attry,</if>
-        <if test="attrz !=null and attrz !=''">attrz,</if>
+        attra,attrb,
+        attrc,attrd,attre,
+        attrf,attrg,attrh,
+        attri,attrj,attrk,
+        attrl,attrm,attrn,
+        attro,attrp,attrq,
+        attrr,attrs,attrt,
+        attru,attrv,attrw,
+        attrx,attry,attrz,
         update_time,
         timeout,
         create_time
@@ -114,94 +99,140 @@
         <if test="updateBy !=null and updateBy !=''">#{updateBy},</if>
         <if test="remark !=null and remark !=''">#{remark},</if>
         <if test="name !=null and name !=''">#{name},</if>
+        <if test="formlist !=null and formlist !=''">#{formlist},</if>
         <if test="formlevel !=null and formlevel !=''">#{formlevel},</if>
         <if test="isdelete !=null and isdelete !=''">#{isdelete},</if>
         <if test="userid !=null and userid !=''">#{userid},</if>
         <if test="projectid !=null and projectid !=''">#{projectid},</if>
         <if test="custommember !=null and custommember !=''">#{custommember},</if>
-        <if test="attra !=null and attra !=''">#{attra},</if>
-        <if test="attrb !=null and attrb !=''">#{attrb},</if>
-        <if test="attrc !=null and attrc !=''">#{attrc},</if>
-        <if test="attrd !=null and attrd !=''">#{attrd},</if>
-        <if test="attre !=null and attre !=''">#{attre},</if>
-        <if test="attrf !=null and attrf !=''">#{attrf},</if>
-        <if test="attrg !=null and attrg !=''">#{attrg},</if>
-        <if test="attrh !=null and attrh !=''">#{attrh},</if>
-        <if test="attri !=null and attri !=''">#{attri},</if>
-        <if test="attrj !=null and attrj !=''">#{attrj},</if>
-        <if test="attrk !=null and attrk !=''">#{attrk},</if>
-        <if test="attrl !=null and attrl !=''">#{attrl},</if>
-        <if test="attrm !=null and attrm !=''">#{attrm},</if>
-        <if test="attrn !=null and attrn !=''">#{attrn},</if>
-        <if test="attro !=null and attro !=''">#{attro},</if>
-        <if test="attrp !=null and attrp !=''">#{attrp},</if>
-        <if test="attrq !=null and attrq !=''">#{attrq},</if>
-        <if test="attrr  !=null and attrr !=''">#{attrr},</if>
-        <if test="attrs !=null and attrs !=''">#{attrs},</if>
-        <if test="attrt !=null and attrt !=''">#{attrt},</if>
-        <if test="attru !=null and attru !=''">#{attru},</if>
-        <if test="attrv !=null and attrv !=''">#{attrv},</if>
-        <if test="attrw !=null and attrw !=''">#{attrw},</if>
-        <if test="attrx !=null and attrx !=''">#{attrx},</if>
-        <if test="attry !=null and attry !=''">#{attry},</if>
-        <if test="attrz !=null and attrz !=''">#{attrz},</if>
+        #{attra},
+        #{attrb},
+        #{attrc},
+        #{attrd},
+        #{attre},
+        #{attrf},
+        #{attrg},
+        #{attrh},
+        #{attri},
+        #{attrj},
+        #{attrk},
+        #{attrl},
+        #{attrm},
+        #{attrn},
+        #{attro},
+        #{attrp},
+        #{attrq},
+        #{attrr},
+        #{attrs},
+        #{attrt},
+        #{attru},
+        #{attrv},
+        #{attrw},
+        #{attrx},
+        #{attry},
+        #{attrz},
         #{updateTime},
         #{timeout},
         #{createTime}
         )
     </insert>
-    <update id="update"></update>
-    <delete id="deleteById"></delete>
+    <update id="update">
+        update sys_flow_formcontent
+        <set>
+            <if test="formid !=null and formid !=''">formid=#{formid},</if>
+            <if test="createBy !=null and createBy !=''">create_by=#{createBy},</if>
+            <if test="updateBy !=null and updateBy !=''">update_by=#{updateBy},</if>
+            <if test="remark !=null and remark !=''">remark=#{remark},</if>
+            <if test="name !=null and name !=''">name=#{name},</if>
+            <if test="formlist !=null and formlist !=''">formlist=#{formlist},</if>
+            <if test="formlevel !=null and formlevel !=''">formlevel=#{formlevel},</if>
+            <if test="isdelete !=null and isdelete !=''">isdelete=#{isdelete},</if>
+            <if test="userid !=null and userid !=''">userid=#{userid},</if>
+            <if test="projectid !=null and projectid !=''">projectid=#{projectid},</if>
+            <if test="custommember !=null and custommember !=''">custommember=#{custommember},</if>
+            attra=#{attra},attrb=#{attrb},attrc=#{attrc},
+            attrd=#{attrd},attre=#{attre},attrf=#{attrf},
+            attrg=#{attrg},attrh=#{attrh},attri=#{attri},
+            attrj=#{attrj},attrk=#{attrk},attrl=#{attrl},
+            attrm=#{attrm},attrn=#{attrn},attro=#{attro},
+            attrp=#{attrp},attrq=#{attrq},attrr=#{attrr},
+            attrs=#{attrs},attrt=#{attrt},attru=#{attru},
+            attrv=#{attrv},attrw=#{attrw},attrx=#{attrx},
+            attry=#{attry},attrz=#{attrz},
+            update_time=#{updateTime},
+            timeout=#{timeout},
+            create_time=#{createTime}
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deleteById">
+        delete
+        from sys_flow_formcontent
+        where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
     <select id="queryById" resultType="com.jeethink.project.dynamic.domain.SysFlowFormcontent"></select>
     <select id="queryAllByLimit" resultType="com.jeethink.project.dynamic.domain.SysFlowFormcontent"></select>
 
 
     <select id="queryAll" parameterType="SysFlowFormcontent" resultMap="BaseResultMap">
         select id,
-               formid,
-               create_by,
-               create_time,
-               update_by,
-               update_time,
-               remark,
-               attra,
-               attrb,
-               attrc,
-               attrd,
-               attre,
-               attrf,
-               attrg,
-               attrh,
-               attri,
-               attrj,
-               attrk,
-               attrl,
-               attrm,
-               attrn,
-               attro,
-               attrp,
-               attrq,
-               attrr,
-               attrs,
-               attrt,
-               attru,
-               attrv,
-               attrw,
-               attrx,
-               attry,
-               attrz,
-               name,
-               formlevel,
-               isdelete,
-               timeout,
-               userid,
-               projectid,
-               custommember
+        formid,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        attra,
+        attrb,
+        attrc,
+        attrd,
+        attre,
+        attrf,
+        attrg,
+        attrh,
+        attri,
+        attrj,
+        attrk,
+        attrl,
+        attrm,
+        attrn,
+        attro,
+        attrp,
+        attrq,
+        attrr,
+        attrs,
+        attrt,
+        attru,
+        attrv,
+        attrw,
+        attrx,
+        attry,
+        attrz,
+        name,
+        formlist,
+        formlevel,
+        isdelete,
+        timeout,
+        userid,
+        projectid,
+        custommember
         from sys_flow_formcontent
         <where>
+            AND create_by = #{createBy}
             <if test="formid != null and formid != 0">
                 AND formid = #{formid}
             </if>
+            <if test="id != null and id != 0">
+                AND id = #{id}
+            </if>
         </where>
+    </select>
+    <select id="queryTotal" resultType="java.lang.Integer">
+        select count(*) from sys_flow_formcontent
     </select>
 </mapper>

@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 import java.util.List;
 
 import com.jeethink.common.utils.IdWorker;
+import com.jeethink.framework.web.controller.BaseController;
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 import com.jeethink.project.dynamic.domain.SysFlowFormcontent;
 import com.jeethink.project.dynamic.mapper.SysFlowFormcontentMapper;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Service;
  * @since 2021-04-25 16:11:57
  */
 @Service("sysFlowFormcontentService")
-public class SysFlowFormcontentServiceImpl implements SysFlowFormcontentService {
+public class SysFlowFormcontentServiceImpl extends BaseController  implements SysFlowFormcontentService {
     @Resource
     private SysFlowFormcontentMapper sysFlowFormcontentMapper;
     @Autowired
@@ -34,8 +36,16 @@ public class SysFlowFormcontentServiceImpl implements SysFlowFormcontentService 
     }
 
     @Override
-    public List<SysFlowFormcontent> queryAll(SysFlowFormcontent sysFlowFormcontent) {
-        return sysFlowFormcontentMapper.queryAll(sysFlowFormcontent);
+    public int queryTotal() {
+        return this.sysFlowFormcontentMapper.queryTotal();
+    }
+
+    @Override
+    public TableDataInfo queryAll(SysFlowFormcontent sysFlowFormcontent) {
+
+        List<SysFlowFormcontent> sysFlowFormcontents = sysFlowFormcontentMapper.queryAll(sysFlowFormcontent);
+        TableDataInfo dataTable = getDataTable(sysFlowFormcontents);
+        return dataTable;
     }
 
     /**
@@ -69,9 +79,8 @@ public class SysFlowFormcontentServiceImpl implements SysFlowFormcontentService 
      * @return 实例对象
      */
     @Override
-    public SysFlowFormcontent update(SysFlowFormcontent sysFlowFormcontent) {
-        this.sysFlowFormcontentMapper.update(sysFlowFormcontent);
-        return this.queryById(sysFlowFormcontent.getId());
+    public int update(SysFlowFormcontent sysFlowFormcontent) {
+        return sysFlowFormcontentMapper.update(sysFlowFormcontent);
     }
 
     /**
@@ -81,7 +90,7 @@ public class SysFlowFormcontentServiceImpl implements SysFlowFormcontentService 
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(String id) {
-        return this.sysFlowFormcontentMapper.deleteById(id) > 0;
+    public int deleteById(String[] id) {
+        return sysFlowFormcontentMapper.deleteById(id);
     }
 }

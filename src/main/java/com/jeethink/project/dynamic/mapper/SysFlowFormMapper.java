@@ -8,7 +8,7 @@ public interface SysFlowFormMapper {
 
 
     List<FormType> queryById(FormType formType);
-
+    List<FormType> queryContent(SysFlowForm sysFlowForm);
     /**
      * 查询指定行数据
      *

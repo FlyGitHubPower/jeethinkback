@@ -5,6 +5,7 @@ import com.jeethink.framework.aspectj.lang.annotation.Log;
 import com.jeethink.framework.aspectj.lang.enums.BusinessType;
 import com.jeethink.framework.web.controller.BaseController;
 import com.jeethink.framework.web.domain.AjaxResult;
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowType;
 import com.jeethink.project.dynamic.service.SysFlowTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ public class SysFlowTypeController extends BaseController {
 
 //  @PreAuthorize("@ss.hasPermi('system:dynamic:list')")
     @GetMapping("/list")
-    public AjaxResult list(SysFlowType formtype) {
+    public TableDataInfo list(SysFlowType formtype) {
+        startPage();
         List<SysFlowType> flowTypes = typeService.selectTypeList(formtype);
-        return AjaxResult.success(flowTypes);
+        return getDataTable(flowTypes);
     }
 
     @GetMapping("/listType")

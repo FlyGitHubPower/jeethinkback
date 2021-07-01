@@ -1,18 +1,22 @@
 package com.jeethink.project.dynamic.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.jeethink.framework.web.controller.BaseController;
 import com.jeethink.framework.web.domain.AjaxResult;
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 import com.jeethink.project.dynamic.domain.SysFlowType;
 import com.jeethink.project.dynamic.service.SysFlowFormattrService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.util.*;
 
 @RestController
 @RequestMapping("/system/sysFlowFormattr")
-public class SysFlowFormattrController extends BaseController{
+public class SysFlowFormattrController extends BaseController {
 
     /**
      * 服务对象
@@ -38,9 +42,37 @@ public class SysFlowFormattrController extends BaseController{
     }
 
     @GetMapping("/selectAll")
-    public AjaxResult selectAll(SysFlowFormattr sysFlowFormattr) {
+    public TableDataInfo selectAll(SysFlowFormattr sysFlowFormattr) throws IllegalAccessException {
+        startPage();
         List<SysFlowFormattr> flowmAttr = sysFlowFormattrService.queryAll(sysFlowFormattr);
-        return AjaxResult.success(flowmAttr);
+        List list = new ArrayList();
+
+
+
+        for (SysFlowFormattr s:flowmAttr
+             ) {
+            Map map=new HashMap();
+            JSONObject js= (JSONObject) JSON.parse(s.getAdAttribute());
+            map.put("alias",s.getAlias());
+            map.put("name",s.getName());
+            map.put("id",s.getId());
+            map.put("remark",s.getRemark());
+            map.put("create_time",s.getCreate_time());
+            map.put("typeid",s.getTypeid());
+            map.put("types",s.getTypes());
+            map.put("checkrule",s.getCheckrule());
+            map.put("length",s.getLength());
+            map.put("checkjs",s.getCheckjs());
+            map.put("optionlist",s.getOptionlist());
+            map.put("typ",s.getTyp());
+            map.put("adAttribute",js);
+            list.add(map);
+
+        }
+
+
+
+        return getDataTable(list);
     }
 
     @PostMapping("/add")

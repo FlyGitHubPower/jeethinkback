@@ -51,10 +51,10 @@ public class SysFlowFormattr implements Serializable {
     private Date create_time;
 
     private String checkjs;
-    //TODO 确定类型
     private String optionlist;
 
     private String typ;
+    private String adAttribute;
 
 
 }

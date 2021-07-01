@@ -93,6 +93,15 @@ public class SysFlowForm implements Serializable {
 
     private String externalurl;
     private String typ;
+    private String submiter;
+
+    public String getSubmiter() {
+        return submiter;
+    }
+
+    public void setSubmiter(String submiter) {
+        this.submiter = submiter;
+    }
 
     public String getZdlist() {
         return zdlist;
