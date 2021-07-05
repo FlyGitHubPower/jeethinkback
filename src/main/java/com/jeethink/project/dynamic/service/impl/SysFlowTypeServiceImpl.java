@@ -39,6 +39,16 @@ public class SysFlowTypeServiceImpl implements SysFlowTypeService {
         }
         return list;
     }
+    @Override
+    public List selectTypeName(SysFlowType type) {
+        List<String> list =  new ArrayList<>();
+        List<SysFlowType> types = sysFlowTypeMapper.selectFormType(type);
+        for (SysFlowType typess:types
+        ) {
+            list.add(typess.getName());
+        }
+        return list;
+    }
 
     @Override
     public int insertType(SysFlowType type) {

@@ -232,7 +232,5 @@
             </if>
         </where>
     </select>
-    <select id="queryTotal" resultType="java.lang.Integer">
-        select count(*) from sys_flow_formcontent
-    </select>
+
 </mapper>

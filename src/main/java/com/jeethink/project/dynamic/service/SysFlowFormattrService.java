@@ -1,5 +1,6 @@
 package com.jeethink.project.dynamic.service;
 
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public interface SysFlowFormattrService {
 
 
     List<SysFlowFormattr> queryAll(SysFlowFormattr sysFlowFormattr);
+    TableDataInfo queryAllTable(SysFlowFormattr sysFlowFormattr);
     /**
      * 修改数据
      *

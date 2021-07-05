@@ -62,6 +62,9 @@
             <if test="typeid != null and typeid != 0">
                 AND t.typeid = #{typeid}
             </if>
+            <if test="typ != null and typ != ''">
+                AND f.name like concat('%', #{typ}, '%')
+            </if>
         </where>
     </select>
 

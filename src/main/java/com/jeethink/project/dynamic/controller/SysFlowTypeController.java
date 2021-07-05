@@ -8,6 +8,8 @@ import com.jeethink.framework.web.domain.AjaxResult;
 import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowType;
 import com.jeethink.project.dynamic.service.SysFlowTypeService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -35,7 +37,12 @@ public class SysFlowTypeController extends BaseController {
         List<SysFlowType> flowTypes = typeService.selectType(formtype);
         return AjaxResult.success(flowTypes);
     }
-
+    @ApiOperation("查询所属类别列表")
+    @GetMapping("/listTypeName")
+    public AjaxResult listtypename(SysFlowType formtype) {
+        List<SysFlowType> flowTypes = typeService.selectTypeName(formtype);
+        return AjaxResult.success(flowTypes);
+    }
     @Log(title = "事件管理", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     public AjaxResult add(@RequestBody SysFlowType formtype) {

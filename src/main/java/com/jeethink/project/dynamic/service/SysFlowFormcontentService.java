@@ -22,7 +22,6 @@ public interface SysFlowFormcontentService {
      * @return 实例对象
      */
     SysFlowFormcontent queryById(String id);
-    int queryTotal();
     TableDataInfo queryAll(SysFlowFormcontent sysFlowFormcontent);
     /**
      * 查询多条数据

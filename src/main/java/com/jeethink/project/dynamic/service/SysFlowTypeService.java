@@ -8,6 +8,7 @@ import java.util.List;
 public interface SysFlowTypeService {
     public List<SysFlowType> selectTypeList(SysFlowType type);
     public List<SysFlowType> selectType(SysFlowType type);
+    public List<SysFlowType> selectTypeName(SysFlowType type);
     public int insertType(SysFlowType type);
     public int updateType(SysFlowType type);
     public int deleteTypeById(String[] id);

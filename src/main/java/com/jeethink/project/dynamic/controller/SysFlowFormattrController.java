@@ -6,6 +6,7 @@ import com.jeethink.framework.web.controller.BaseController;
 import com.jeethink.framework.web.domain.AjaxResult;
 import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
+import com.jeethink.project.dynamic.domain.SysFlowFormcontent;
 import com.jeethink.project.dynamic.domain.SysFlowType;
 import com.jeethink.project.dynamic.service.SysFlowFormattrService;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +43,12 @@ public class SysFlowFormattrController extends BaseController {
     }
 
     @GetMapping("/selectAll")
-    public TableDataInfo selectAll(SysFlowFormattr sysFlowFormattr) throws IllegalAccessException {
+    public AjaxResult selectAll(SysFlowFormattr sysFlowFormattr) throws IllegalAccessException {
         startPage();
-        List<SysFlowFormattr> flowmAttr = sysFlowFormattrService.queryAll(sysFlowFormattr);
+
+        TableDataInfo tableDataInfo = sysFlowFormattrService.queryAllTable(sysFlowFormattr);
+        List<SysFlowFormattr> flowmAttr = (List<SysFlowFormattr>) tableDataInfo.getRows();
+        long total = tableDataInfo.getTotal();
         List list = new ArrayList();
 
 
@@ -72,7 +76,7 @@ public class SysFlowFormattrController extends BaseController {
 
 
 
-        return getDataTable(list);
+        return AjaxResult.success(list,String.valueOf(total),null);
     }
 
     @PostMapping("/add")

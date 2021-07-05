@@ -55,5 +55,4 @@ public interface SysFlowFormcontentMapper {
      */
     int deleteById(String[] id);
 
-    int queryTotal();
 }

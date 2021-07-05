@@ -35,10 +35,6 @@ public class SysFlowFormcontentServiceImpl extends BaseController  implements Sy
         return this.sysFlowFormcontentMapper.queryById(id);
     }
 
-    @Override
-    public int queryTotal() {
-        return this.sysFlowFormcontentMapper.queryTotal();
-    }
 
     @Override
     public TableDataInfo queryAll(SysFlowFormcontent sysFlowFormcontent) {

@@ -55,16 +55,12 @@ public class SysFlowFormcontentController extends BaseController {
     @GetMapping("/selectAll")
     public AjaxResult selectAll(SysFlowFormcontent sysFlowFormcontent, SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr, SysFlowType sysFlowType) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         startPage();
-//        sysFlowFormcontent.setCreateBy("admin");
         TableDataInfo tableDataInfo = sysFlowFormcontentService.queryAll(sysFlowFormcontent);
-        int total1 = sysFlowFormcontentService.queryTotal();
         List<SysFlowFormcontent> flowFormcontents = (List<SysFlowFormcontent>) tableDataInfo.getRows();
         long total = tableDataInfo.getTotal();
         List<SysFlowFormattr> FlowFormattr = null;
         List list = new ArrayList();
-//list.forEach(list11->{
-//    list11.
-//})
+
     if(!flowFormcontents.isEmpty()){
         for (SysFlowFormcontent s : flowFormcontents) {
             Map map = new LinkedHashMap();
@@ -139,7 +135,7 @@ public class SysFlowFormcontentController extends BaseController {
             list.add(param);
         }
     }
-        return AjaxResult.success(list,String.valueOf(total1),null);
+        return AjaxResult.success(list,String.valueOf(total),null);
     }
     @CrossOrigin
     @GetMapping("/selectVue")
@@ -153,7 +149,6 @@ public class SysFlowFormcontentController extends BaseController {
 
         TableDataInfo tableDataInfo = sysFlowFormcontentService.queryAll(sysFlowFormcontent);
         List<SysFlowFormcontent> flowFormcontents = (List<SysFlowFormcontent>) tableDataInfo.getRows();
-        int total1 = sysFlowFormcontentService.queryTotal();
         long total = tableDataInfo.getTotal();
         if(flowFormcontents.isEmpty()){
             return AjaxResult.error("抱歉，您的ID有误！");
@@ -234,7 +229,7 @@ public class SysFlowFormcontentController extends BaseController {
                 param.put("createTime", formatter.format(createTime));
                 list.add(param);
             }
-            return AjaxResult.success(list,String.valueOf(total1),null);
+            return AjaxResult.success(list,String.valueOf(total),null);
 
     }
 

@@ -55,23 +55,24 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
             List<FormType> formTypess = sysFlowFormMapper.queryById(formType1);
             List list1 = new ArrayList();
             for (FormType type1 : formTypess) {
-                Map map=new HashMap();
+                Map map = new HashMap();
                 if (type1.getZdlist() != null) {
 
                     String zdlistStrings = type1.getZdlist();
 //                zdlistStrings = zdlistStrings.replace("\n", "").replace(" ", "");
                     JSONArray zdlist = (JSONArray) JSON.parse(zdlistStrings);
 
-                    map.put("typeid",type1.getTypeid());
-                    map.put("formid",type1.getFormid());
-                    map.put("typename",type1.getTypename());
-                    map.put("formname",type1.getFormname());
-                    map.put("label",type1.getFormname());
-                    map.put("zdlist",zdlist);
+                    map.put("typeid", type1.getTypeid());
+                    map.put("formid", type1.getFormid());
+                    map.put("typename", type1.getTypename());
+                    map.put("formname", type1.getFormname());
+                    map.put("label", type1.getFormname());
+                    map.put("zdlist", zdlist);
                     list1.add(map);
                 }
 //            map1.put("list", list1);}
-                map1.put("children", list1);}
+                map1.put("children", list1);
+            }
             list.add(map1);
 
         }
@@ -98,23 +99,24 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
             List<FormType> formTypess = sysFlowFormMapper.queryById(formType1);
             List list1 = new ArrayList();
             for (FormType type1 : formTypess) {
-                Map map=new HashMap();
-            if (type1.getZdlist() != null) {
+                Map map = new HashMap();
+                if (type1.getZdlist() != null) {
 
-                String zdlistStrings = type1.getZdlist();
+                    String zdlistStrings = type1.getZdlist();
 //                zdlistStrings = zdlistStrings.replace("\n", "").replace(" ", "");
-                JSONArray zdlist = (JSONArray) JSON.parse(zdlistStrings);
+                    JSONArray zdlist = (JSONArray) JSON.parse(zdlistStrings);
 
-                map.put("typeid",type1.getTypeid());
-                map.put("formid",type1.getFormid());
-                map.put("typename",type1.getTypename());
-                map.put("formname",type1.getFormname());
-                map.put("label",type1.getFormname());
-                map.put("zdlist",zdlist);
-                list1.add(map);
-            }
+                    map.put("typeid", type1.getTypeid());
+                    map.put("formid", type1.getFormid());
+                    map.put("typename", type1.getTypename());
+                    map.put("formname", type1.getFormname());
+                    map.put("label", type1.getFormname());
+                    map.put("zdlist", zdlist);
+                    list1.add(map);
+                }
 //            map1.put("list", list1);}
-            map1.put("children", list1);}
+                map1.put("children", list1);
+            }
             list.add(map1);
 
         }
@@ -128,7 +130,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
 
 
     @Override
-    public List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr, String[] formid) {
+    public List queryHtml(SysFlowForm sysFlowForm, SysFlowFormattr sysFlowFormattr, String[] formid){
         List list = new ArrayList();
         List list1 = new ArrayList();
         List list2 = new ArrayList();
@@ -198,32 +200,21 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
 
         sb2.append(s.getName());
         List<String> list3 = new ArrayList();
-        list3.add(s.getAttra());
-        list3.add(s.getAttrb());
-        list3.add(s.getAttrc());
-        list3.add(s.getAttrd());
-        list3.add(s.getAttre());
-        list3.add(s.getAttrf());
-        list3.add(s.getAttrg());
-        list3.add(s.getAttrh());
-        list3.add(s.getAttri());
-        list3.add(s.getAttrj());
-        list3.add(s.getAttrk());
-        list3.add(s.getAttrl());
-        list3.add(s.getAttrm());
-        list3.add(s.getAttrn());
-        list3.add(s.getAttro());
-        list3.add(s.getAttrp());
-        list3.add(s.getAttrq());
-        list3.add(s.getAttrr());
-        list3.add(s.getAttrs());
-        list3.add(s.getAttrt());
-        list3.add(s.getAttru());
-        list3.add(s.getAttrv());
-        list3.add(s.getAttrw());
-        list3.add(s.getAttrx());
-        list3.add(s.getAttry());
-        list3.add(s.getAttrz());
+
+
+        char xiaoxie = 'a';
+        //定义循环，次数26次
+        for (int i = 0; i < 26; i++) {
+
+            xiaoxie = (char) (i + 97);
+            try {
+                Method method = s.getClass().getMethod("getAttr" + xiaoxie);
+                String attrs = method.invoke(s).toString();
+                list3.add(attrs);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
         sb = sb.append("<form id='ff' action='#' method='post'>");
         for (int i = 0; i < 26; i++) {
             Boolean outFlag = true;
@@ -282,7 +273,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                         System.out.println(Arrays.toString(arr) + "单选");
 
                         for (int j = 0; j < arr.length; j++) {
-                            innerContent = "<input type='radio' value='"+arr[j]+"' name='" + idString + "'/>" + arr[j] + innerContent;
+                            innerContent = "<input type='radio' value='" + arr[j] + "' name='" + idString + "'/>" + arr[j] + innerContent;
                         }
                         inputType = "<p>" +
                                 innerContent +
@@ -293,7 +284,7 @@ public class SysFlowFormServiceImpl implements SysFlowFormService {
                         String[] arr = str.split(",");
                         System.out.println(Arrays.toString(arr) + "多选");
                         for (int j = 0; j < arr.length; j++) {
-                            innerContent = "<input type='checkbox' value='"+arr[j]+"' name='" + idString + "'/>" + arr[j] + innerContent;
+                            innerContent = "<input type='checkbox' value='" + arr[j] + "' name='" + idString + "'/>" + arr[j] + innerContent;
                         }
                         inputType = "<p>" +
                                 innerContent +

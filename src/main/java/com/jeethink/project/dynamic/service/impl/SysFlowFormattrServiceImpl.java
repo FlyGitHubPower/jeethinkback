@@ -4,6 +4,8 @@ package com.jeethink.project.dynamic.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jeethink.common.utils.IdWorker;
+import com.jeethink.framework.web.controller.BaseController;
+import com.jeethink.framework.web.page.TableDataInfo;
 import com.jeethink.project.dynamic.domain.SysFlowFormattr;
 import com.jeethink.project.dynamic.mapper.SysFlowFormattrMapper;
 import com.jeethink.project.dynamic.service.SysFlowFormattrService;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("sysFlowFormattrService")
-public class SysFlowFormattrServiceImpl implements SysFlowFormattrService {
+public class SysFlowFormattrServiceImpl extends BaseController implements SysFlowFormattrService {
     @Resource
     private SysFlowFormattrMapper sysFlowFormattrMapper;
     @Autowired
@@ -59,6 +61,12 @@ public class SysFlowFormattrServiceImpl implements SysFlowFormattrService {
     @Override
     public List<SysFlowFormattr> queryAll(SysFlowFormattr sysFlowFormattr) {
         return sysFlowFormattrMapper.queryAll(sysFlowFormattr);
+    }
+    @Override
+    public TableDataInfo queryAllTable(SysFlowFormattr sysFlowFormattr) {
+        List<SysFlowFormattr> sysFlowFormattrs = sysFlowFormattrMapper.queryAll(sysFlowFormattr);
+        TableDataInfo dataTable = getDataTable(sysFlowFormattrs);
+        return dataTable;
     }
 
     /**
